@@ -68,45 +68,46 @@ function AccountDropdown({
           <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
         </svg>
       </button>
-      {open && (
-        <div className="bg-white" style={{ borderRadius: 0 }}>
-          {accounts.map((acc, idx) => (
-            <div
-              key={idx}
-              className={`flex items-center justify-between px-4 py-3 ${
-                idx !== accounts.length - 1 ? 'border-b border-gray-100' : ''
-              }`}
-              style={{ borderRadius: 0 }}
-            >
-              <div className="text-left">
-                <div className="text-[15px] text-[#524548]">
-                  {acc.bank} {acc.number}
-                </div>
-                <div className="text-[15px] text-gray-500">{acc.name}</div>
+      <div
+        className={`overflow-hidden bg-white transition-all duration-300 ease-in-out ${open ? 'max-h-[200px] translate-y-0 opacity-100' : 'max-h-0 -translate-y-2 opacity-0'} `}
+        style={{ borderRadius: 0 }}
+      >
+        {accounts.map((acc, idx) => (
+          <div
+            key={idx}
+            className={`flex items-center justify-between px-4 py-3 ${
+              idx !== accounts.length - 1 ? 'border-b border-gray-100' : ''
+            }`}
+            style={{ borderRadius: 0 }}
+          >
+            <div className="text-left">
+              <div className="text-[15px] text-[#524548]">
+                {acc.bank} {acc.number}
               </div>
-              <div className="flex gap-2">
-                <button
-                  onClick={() => handleCopy(acc)}
-                  className="flex items-center gap-1 bg-gray-50 px-3 py-1 text-[14px] text-[#333] hover:bg-gray-100"
-                  style={{ borderRadius: 0 }}
-                >
-                  <svg
-                    className="h-4 w-4 text-gray-400"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    viewBox="0 0 24 24"
-                  >
-                    <rect x="9" y="9" width="13" height="13" rx="2" />
-                    <rect x="3" y="3" width="13" height="13" rx="2" />
-                  </svg>
-                  복사
-                </button>
-              </div>
+              <div className="text-[15px] text-gray-500">{acc.name}</div>
             </div>
-          ))}
-        </div>
-      )}
+            <div className="flex gap-2">
+              <button
+                onClick={() => handleCopy(acc)}
+                className="flex items-center gap-1 bg-gray-50 px-3 py-1 text-[14px] text-[#333] hover:bg-gray-100"
+                style={{ borderRadius: 0 }}
+              >
+                <svg
+                  className="h-4 w-4 text-gray-400"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  viewBox="0 0 24 24"
+                >
+                  <rect x="9" y="9" width="13" height="13" rx="2" />
+                  <rect x="3" y="3" width="13" height="13" rx="2" />
+                </svg>
+                복사
+              </button>
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
@@ -301,7 +302,7 @@ export default function Home() {
       {/* 대표 이미지 */}
       <div
         className="relative mx-auto flex w-full max-w-md flex-col items-center overflow-hidden"
-        data-aos="fade-down"
+        data-aos="fade-up"
       >
         <BGMPlayer playTrigger={playBGM} />
         <SparkleRain count={18} />
@@ -341,12 +342,12 @@ export default function Home() {
         </div>
       </div>
       {/* 본문 카드 */}
-      <div
-        className="font-noto-serif mx-auto mt-0 flex w-full max-w-md flex-col gap-8 bg-white px-0 pb-10 text-black"
-        data-aos="fade-up"
-      >
+      <div className="font-noto-serif mx-auto mt-0 flex w-full max-w-md flex-col gap-8 bg-white px-0 pb-10 text-black">
         {/* 날짜/장소 */}
-        <section className="flex flex-col items-center gap-1 px-8 py-6 text-center">
+        <section
+          className="flex flex-col items-center gap-1 px-8 py-6 text-center"
+          data-aos="fade-up"
+        >
           <div className="mb-3 text-[20px] font-semibold text-[#333]">
             김윤환&nbsp;&nbsp;|&nbsp;&nbsp;김송희
           </div>
@@ -355,7 +356,10 @@ export default function Home() {
         </section>
 
         {/* 인사말(시) 및 초대 문구 */}
-        <section className="flex flex-col items-center gap-6 px-8 py-6 text-center">
+        <section
+          className="flex flex-col items-center gap-6 px-8 py-6 text-center"
+          data-aos="fade-up"
+        >
           {/* 꽃 아이콘 */}
           <div>
             {/* 원하는 꽃 SVG 아이콘을 직접 넣거나, 아래처럼 이모지로 대체 가능 */}
@@ -381,7 +385,7 @@ export default function Home() {
             함께해 주시면 감사하겠습니다.
           </div>
           {/* 초대장 타이틀 */}
-          <div className="mt-8">
+          <div className="mt-8" data-aos="fade-up">
             <div className="mb-2 text-xs tracking-widest text-[#89757a]">INVITATION</div>
             <div className="mb-2 text-[17px] font-semibold text-[#333]">
               소중한 분들을 초대합니다
@@ -395,7 +399,10 @@ export default function Home() {
           </div>
         </section>
         {/* 신랑신부 사진 + 연락하기 버튼 */}
-        <section className="flex flex-col items-center gap-6 px-8 py-6 text-center">
+        <section
+          className="flex flex-col items-center gap-6 px-8 py-6 text-center"
+          data-aos="fade-up"
+        >
           {/* 신랑신부 사진 */}
           <div className="flex w-full justify-center">
             <div className="relative aspect-[4/3] w-full max-w-md overflow-hidden bg-gray-100">
@@ -440,7 +447,10 @@ export default function Home() {
           </div>
         </section>
         {/* 캘린더 & D-day 타이머 */}
-        <section className="flex flex-col items-center gap-4 bg-[#faf8f7] px-8 py-10 text-center">
+        <section
+          className="flex flex-col items-center gap-4 bg-[#faf8f7] px-8 py-10 text-center"
+          data-aos="fade-up"
+        >
           {/* 날짜 및 시간 */}
           <div className="text-center">
             <div className="mb-1 text-[24px] font-semibold tracking-widest text-[#333]">
@@ -679,14 +689,14 @@ export default function Home() {
         </section>
         {/* 계좌번호(드롭다운) */}
         <section
-          className="flex flex-col items-center gap-6 px-8 py-6 text-center"
+          className="flex flex-col items-center gap-4 px-8 py-6 text-center"
           data-aos="fade-up"
         >
           <div>
             {/* 꽃 SVG */}
             <Image src="/images/flower.svg" width={100} height={100} alt="flower" />
           </div>
-          <div className="text-[20px] font-semibold text-[#89757a]">마음 전하실 곳</div>
+          <div className="mb-4 text-[20px] font-semibold text-[#89757a]">마음 전하실 곳</div>
           <AccountDropdown
             label="신랑측 계좌번호"
             accounts={[{ bank: '카카오뱅크', number: '1111111-111111', name: '김윤환' }]}
