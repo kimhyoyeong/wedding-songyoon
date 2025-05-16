@@ -45,7 +45,7 @@ function AccountDropdown({
   const [open, setOpen] = useState(false);
 
   const handleCopy = (acc: { bank: string; number: string; name: string }) => {
-    navigator.clipboard.writeText(`${acc.bank} ${acc.number} (${acc.name})`);
+    navigator.clipboard.writeText(`${acc.bank} ${acc.number} ${acc.name}`);
   };
 
   return (
@@ -53,7 +53,7 @@ function AccountDropdown({
       <button
         type="button"
         onClick={() => setOpen((v) => !v)}
-        className="flex w-full items-center justify-between bg-[#faf8f7] px-4 py-3 text-[17px] font-medium text-gray-700"
+        className="flex w-full items-center justify-between bg-[#faf8f7] px-4 py-3 text-[16px] font-medium text-[#524548]"
         style={{ borderRadius: 0 }}
       >
         {label}
@@ -78,15 +78,15 @@ function AccountDropdown({
               style={{ borderRadius: 0 }}
             >
               <div className="text-left">
-                <div className="text-[15px] text-gray-700">
+                <div className="text-[15px] text-[#524548]">
                   {acc.bank} {acc.number}
                 </div>
-                <div className="text-[14px] text-gray-500">{acc.name}</div>
+                <div className="text-[15px] text-gray-500">{acc.name}</div>
               </div>
               <div className="flex gap-2">
                 <button
                   onClick={() => handleCopy(acc)}
-                  className="flex items-center gap-1 bg-gray-50 px-3 py-1 text-[14px] text-gray-600 hover:bg-gray-100"
+                  className="flex items-center gap-1 bg-gray-50 px-3 py-1 text-[14px] text-[#333] hover:bg-gray-100"
                   style={{ borderRadius: 0 }}
                 >
                   <svg
@@ -265,19 +265,7 @@ export default function Home() {
           <div className="w-full max-w-xs rounded-2xl border border-[#e8dfdf] bg-white/90 px-8 py-10 text-center shadow-2xl">
             {/* 상단 꽃 아이콘 */}
             <div className="mb-4 flex justify-center">
-              <svg width="40" height="40" viewBox="0 0 48 48" fill="none">
-                <g>
-                  <ellipse cx="24" cy="24" rx="7" ry="7" fill="#cec3c3" fillOpacity="0.7" />
-                  <path
-                    d="M24 10c2.5-7 13-7 13 2.5 0 5-6 7-6 7s7-2 10 3c3 5-4 11-10 7 0 0 6 5 2 10-4 5-12 1-10-6 0 0-2 7-8 6-6-1-7-10 1-12 0 0-8-1-8-8 0-7 10-8 13-2.5z"
-                    fill="#e9e5e5"
-                    stroke="#cec3c3"
-                    strokeWidth="1.5"
-                    strokeLinejoin="round"
-                  />
-                  <circle cx="24" cy="24" r="3.5" fill="#fff" />
-                </g>
-              </svg>
+              <Image src="/images/flower.svg" width={100} height={100} alt="flower" />
             </div>
             <div className="mb-5 text-xl font-bold tracking-tight" style={{ color: '#89757a' }}>
               소중한 당신을 초대합니다.
@@ -347,11 +335,11 @@ export default function Home() {
       >
         {/* 날짜/장소 */}
         <section className="flex flex-col items-center gap-1 px-8 py-6 text-center">
-          <div className="mb-3 text-[18px] font-semibold text-black">
+          <div className="mb-3 text-[20px] font-semibold text-[#333]">
             김윤환&nbsp;&nbsp;|&nbsp;&nbsp;김송희
           </div>
-          <div className="text-[15px] text-gray-600">2025년 8월 24일 일요일 오후 1시</div>
-          <div className="text-[15px] text-gray-600">라루체 웨딩홀 </div>
+          <div className="text-[17px] text-[#333]">2025년 8월 24일 일요일 오후 1시</div>
+          <div className="text-[17px] text-[#333]">라루체 웨딩홀 </div>
         </section>
 
         {/* 인사말(시) 및 초대 문구 */}
@@ -360,30 +348,10 @@ export default function Home() {
           <div>
             {/* 원하는 꽃 SVG 아이콘을 직접 넣거나, 아래처럼 이모지로 대체 가능 */}
             {/* 우아한 꽃 SVG 아이콘 */}
-            <svg
-              width="36"
-              height="36"
-              viewBox="0 0 48 48"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-              className="text-[#89757a]"
-              style={{ display: 'inline-block' }}
-            >
-              <g>
-                <ellipse cx="24" cy="24" rx="6" ry="6" fill="#89757a" fillOpacity="0.7" />
-                <path
-                  d="M24 10c2.5-7 13-7 13 2.5 0 5-6 7-6 7s7-2 10 3c3 5-4 11-10 7 0 0 6 5 2 10-4 5-12 1-10-6 0 0-2 7-8 6-6-1-7-10 1-12 0 0-8-1-8-8 0-7 10-8 13-2.5z"
-                  fill="#fff5e6"
-                  stroke="#89757a"
-                  strokeWidth="1.5"
-                  strokeLinejoin="round"
-                />
-                <circle cx="24" cy="24" r="3" fill="#fff" />
-              </g>
-            </svg>
+            <Image src="/images/flower.svg" width={100} height={100} alt="flower" />
           </div>
           {/* 시 */}
-          <div className="text-[16px] leading-relaxed whitespace-pre-line text-gray-700">
+          <div className="text-[16px] leading-relaxed whitespace-pre-line text-[#524548]">
             햇살처럼 따듯하게 안아주고
             <br />
             곁에서 서로를 웃게 해주는
@@ -403,13 +371,14 @@ export default function Home() {
           {/* 초대장 타이틀 */}
           <div className="mt-8">
             <div className="mb-2 text-xs tracking-widest text-[#89757a]">INVITATION</div>
-            <div className="mb-2 text-[17px] font-semibold text-gray-800">
+            <div className="mb-2 text-[17px] font-semibold text-[#333]">
               소중한 분들을 초대합니다
             </div>
-            <div className="text-[15px] leading-relaxed whitespace-pre-line text-gray-700">
+            <div className="text-[15px] leading-relaxed whitespace-pre-line text-[#524548]">
               새 인생을 시작하는 이 자리에 오셔서
               <br />
-              <span className="font-semibold text-[#89757a]">축복</span>해 주시면 감사하겠습니다.
+              <strong className="font-semibold text-[#89757a]">축복</strong>해 주시면
+              감사하겠습니다.
             </div>
           </div>
         </section>
@@ -427,31 +396,31 @@ export default function Home() {
               />
             </div>
           </div>
-          <div className="mt-6 mb-2 flex w-full max-w-md justify-between text-[18px] leading-relaxed text-gray-700">
+          <div className="mt-6 mb-2 flex w-full max-w-md justify-between text-[18px] leading-relaxed text-[#524548]">
             {/* 신랑 */}
             <div className="flex flex-1 flex-col items-center">
-              <span className="ml-1 font-semibold text-gray-800">김윤환</span>
+              <strong className="ml-1 font-semibold text-[#333]">김윤환</strong>
               <div className="mt-2">
                 <a
                   href="tel:01012345678"
-                  className="mt-4 flex items-center justify-center gap-2 rounded-3xl border border-gray-300 px-4 py-2 text-[14px] text-gray-500 transition hover:bg-gray-100"
+                  className="mt-4 flex items-center justify-center gap-2 rounded-3xl border border-[#e8dfdf] px-4 py-2 text-[14px] text-[#89757a] transition hover:bg-gray-100"
                   style={{ width: 'fit-content', margin: '0 auto' }}
                 >
-                  <FaPhoneAlt className="text-gray-400" />
+                  <FaPhoneAlt />
                   연락하기
                 </a>
               </div>
             </div>
             {/* 신부 */}
             <div className="flex flex-1 flex-col items-center">
-              <span className="ml-1 font-semibold text-gray-800">김송희</span>
+              <strong className="ml-1 font-semibold text-[#333]">김송희</strong>
               <div className="mt-2">
                 <a
                   href="tel:01050512473"
-                  className="mt-4 flex items-center justify-center gap-2 rounded-3xl border border-gray-300 px-4 py-2 text-[14px] text-gray-500 transition hover:bg-gray-100"
+                  className="mt-4 flex items-center justify-center gap-2 rounded-3xl border border-[#e8dfdf] px-4 py-2 text-[14px] text-[#89757a] transition hover:bg-gray-100"
                   style={{ width: 'fit-content', margin: '0 auto' }}
                 >
-                  <FaPhoneAlt className="text-gray-400" />
+                  <FaPhoneAlt />
                   연락하기
                 </a>
               </div>
@@ -462,10 +431,10 @@ export default function Home() {
         <section className="flex flex-col items-center gap-4 bg-[#faf8f7] px-8 py-10 text-center">
           {/* 날짜 및 시간 */}
           <div className="text-center">
-            <div className="mb-1 text-[24px] font-semibold tracking-widest text-gray-700">
+            <div className="mb-1 text-[24px] font-semibold tracking-widest text-[#333]">
               2025.8.24
             </div>
-            <div className="text-[16px] text-gray-600">일요일 오후 1시</div>
+            <div className="text-[16px] text-[#333]">일요일 오후 1시</div>
           </div>
           <div className="mb-4 w-full border-t border-gray-200" />
           {/* 달력 */}
@@ -483,11 +452,11 @@ export default function Home() {
             </thead>
             <tbody>
               <tr>
-                <td className="h-8 w-8 align-middle text-gray-300"></td>
-                <td className="h-8 w-8 align-middle text-gray-300"></td>
-                <td className="h-8 w-8 align-middle text-gray-300"></td>
-                <td className="h-8 w-8 align-middle text-gray-300"></td>
-                <td className="h-8 w-8 align-middle text-gray-300"></td>
+                <td className="h-8 w-8 align-middle text-[#333]"></td>
+                <td className="h-8 w-8 align-middle text-[#333]"></td>
+                <td className="h-8 w-8 align-middle text-[#333]"></td>
+                <td className="h-8 w-8 align-middle text-[#333]"></td>
+                <td className="h-8 w-8 align-middle text-[#333]"></td>
                 <td className="h-8 w-8 align-middle">1</td>
                 <td className="h-8 w-8 align-middle">2</td>
               </tr>
@@ -533,12 +502,12 @@ export default function Home() {
               </tr>
               <tr>
                 <td className="h-8 w-8 align-middle text-red-400">31</td>
-                <td className="h-8 w-8 align-middle text-gray-300"></td>
-                <td className="h-8 w-8 align-middle text-gray-300"></td>
-                <td className="h-8 w-8 align-middle text-gray-300"></td>
-                <td className="h-8 w-8 align-middle text-gray-300"></td>
-                <td className="h-8 w-8 align-middle text-gray-300"></td>
-                <td className="h-8 w-8 align-middle text-gray-300"></td>
+                <td className="h-8 w-8 align-middle text-[#333]"></td>
+                <td className="h-8 w-8 align-middle text-[#333]"></td>
+                <td className="h-8 w-8 align-middle text-[#333]"></td>
+                <td className="h-8 w-8 align-middle text-[#333]"></td>
+                <td className="h-8 w-8 align-middle text-[#333]"></td>
+                <td className="h-8 w-8 align-middle text-[#333]"></td>
               </tr>
             </tbody>
           </table>
@@ -547,11 +516,11 @@ export default function Home() {
 
           {/* 남은 날짜 안내 */}
           <div className="text-center text-[15px]">
-            <span className="font-semibold text-gray-700">윤환</span>
+            <strong className="font-semibold text-[#524548]">윤환</strong>
             <span className="mx-1 text-[#e57373]">♥</span>
-            <span className="font-semibold text-gray-700">송희의 결혼식이</span>
+            <strong className="font-semibold text-[#524548]">송희의 결혼식이</strong>
             <span className="mx-1 font-semibold text-[#e57373]">{dday}일</span>
-            <span className="font-semibold text-gray-700">남았습니다.</span>
+            <strong className="font-semibold text-[#524548]">남았습니다.</strong>
           </div>
         </section>
         {/* 갤러리(슬라이드) */}
@@ -602,11 +571,11 @@ export default function Home() {
         {/* 오시는 길 (지도) */}
         <section className="flex flex-col gap-6 px-8 py-6" data-aos="fade-up">
           <div className="text-center text-[20px] font-semibold text-[#89757a]">오시는 길</div>
-          <div>
-            <div className="flex items-center justify-center gap-2 text-sm text-black">
+          <div className="text-[#333]">
+            <div className="flex items-center justify-center gap-2 text-sm text-[15px]">
               <FaMapMarkerAlt /> 명동 라루체 웨딩홀
             </div>
-            <p className="mt-1 text-center text-xs">서울특별시 중구 퇴계로 18길 46</p>
+            <p className="mt-1 text-center text-xs text-[12px]">서울특별시 중구 퇴계로 18길 46</p>
           </div>
 
           {/* 카카오맵 지도 */}
@@ -636,21 +605,21 @@ export default function Home() {
               }
             }}
           />
-          <div className="flex flex-col gap-2 text-xs text-gray-600">
+          <div className="flex flex-col gap-2 text-xs text-[14px] text-[#333]">
             <div className="flex items-center gap-2">
               <FaSubway className="text-green-600" size={16} />
               <span>
-                <b>명동역</b> 4번 출구 <span className="text-gray-400">(도보 5분)</span>
+                <strong>명동역</strong> 4번 출구 (도보 5분)
               </span>
             </div>
             <div className="flex items-start gap-2">
               <FaBus className="text-blue-600" size={16} />
               <div>
                 <div>
-                  <b>명동역</b> : 104, 105, 421, 463, 507, 604, N16, 7011
+                  <strong>명동역</strong> : 104, 105, 421, 463, 507, 604, N16, 7011
                 </div>
                 <div>
-                  <b>명동입구</b> : 104, 421, 463, 507, 604, N16, 7011, 05
+                  <strong>명동입구</strong> : 104, 421, 463, 507, 604, N16, 7011, 05
                 </div>
               </div>
             </div>
@@ -663,27 +632,9 @@ export default function Home() {
         >
           <div>
             {/* 꽃 SVG */}
-            <svg
-              width="32"
-              height="32"
-              viewBox="0 0 48 48"
-              fill="none"
-              className="mx-auto mb-2 text-[#89757a]"
-            >
-              <g>
-                <ellipse cx="24" cy="24" rx="6" ry="6" fill="#89757a" fillOpacity="0.7" />
-                <path
-                  d="M24 10c2.5-7 13-7 13 2.5 0 5-6 7-6 7s7-2 10 3c3 5-4 11-10 7 0 0 6 5 2 10-4 5-12 1-10-6 0 0-2 7-8 6-6-1-7-10 1-12 0 0-8-1-8-8 0-7 10-8 13-2.5z"
-                  fill="#fff5e6"
-                  stroke="#89757a"
-                  strokeWidth="1.5"
-                  strokeLinejoin="round"
-                />
-                <circle cx="24" cy="24" r="3" fill="#fff" />
-              </g>
-            </svg>
+            <Image src="/images/flower.svg" width={100} height={100} alt="flower" />
           </div>
-          <div className="mb-2 text-[18px] font-semibold text-[#89757a]">마음 전하실 곳</div>
+          <div className="mb-2 text-[20px] font-semibold text-[#89757a]">마음 전하실 곳</div>
           <AccountDropdown
             label="신랑측 계좌번호"
             accounts={[{ bank: '카카오뱅크', number: '1111111-111111', name: '김윤환' }]}
