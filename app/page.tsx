@@ -583,7 +583,7 @@ export default function Home() {
         </section>
         {/* 오시는 길 (지도) */}
         <section className="flex flex-col gap-6 px-8 py-6" data-aos="fade-up">
-          <div className="mb-6 flex flex-col items-center gap-1">
+          <div className="flex flex-col items-center gap-1">
             <p className="text-xs tracking-widest text-[#89757a]">LOCATION</p>
             <p className="text-[20px] font-semibold text-[#89757a]">오시는 길</p>
           </div>
@@ -686,7 +686,7 @@ export default function Home() {
             {/* 꽃 SVG */}
             <Image src="/images/flower.svg" width={100} height={100} alt="flower" />
           </div>
-          <div className="mb-2 text-[20px] font-semibold text-[#89757a]">마음 전하실 곳</div>
+          <div className="text-[20px] font-semibold text-[#89757a]">마음 전하실 곳</div>
           <AccountDropdown
             label="신랑측 계좌번호"
             accounts={[{ bank: '카카오뱅크', number: '1111111-111111', name: '김윤환' }]}
