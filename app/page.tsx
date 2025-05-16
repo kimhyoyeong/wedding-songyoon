@@ -249,14 +249,14 @@ export default function Home() {
 
   return (
     <div className="flex min-h-screen w-full flex-col items-center bg-[#fafafa]">
+      <PetalRain count={18} />
+      <BGMPlayer />
       {/* 대표 이미지 */}
       <div
         className="relative mx-auto flex w-full max-w-md flex-col items-center"
         data-aos="fade-up"
       >
         <SparkleRain count={18} />
-        {/* <PetalRain count={18} /> */}
-        <BGMPlayer />
         <div className="relative flex h-[100svh] w-full items-center justify-center bg-white">
           <Image
             src={galleryImages[0]}
