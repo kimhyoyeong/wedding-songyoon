@@ -183,6 +183,57 @@ function SparkleRain({ count = 24 }) {
   );
 }
 
+function PetalRain({ count = 18 }) {
+  const [petals, setPetals] = useState([]);
+
+  useEffect(() => {
+    const arr = [];
+    for (let i = 0; i < count; i++) {
+      arr.push({
+        id: i,
+        left: Math.random() * 100, // vw
+        delay: Math.random() * 6, // s
+        duration: 7 + Math.random() * 4, // s
+        size: 18 + Math.random() * 18, // px
+        rotate: Math.random() * 360, // deg
+      });
+    }
+    setPetals(arr);
+  }, [count]);
+
+  return (
+    <>
+      {petals.map((p) => (
+        <div
+          key={p.id}
+          className="petal"
+          style={{
+            left: `${p.left}vw`,
+            animationDelay: `${p.delay}s`,
+            animationDuration: `${p.duration}s`,
+            width: p.size,
+            height: p.size,
+            top: -30,
+            transform: `rotate(${p.rotate}deg)`,
+            opacity: 0.75,
+          }}
+        >
+          {/* SVG 벚꽃잎 (또는 풀잎) */}
+          <svg width={p.size} height={p.size} viewBox="0 0 32 32" fill="none">
+            {/* 벚꽃잎 예시 */}
+            <path
+              d="M16 2 C18 8, 30 10, 16 30 C2 10, 14 8, 16 2 Z"
+              fill="#f9c9d2"
+              stroke="#e7a1b0"
+              strokeWidth="1"
+            />
+          </svg>
+        </div>
+      ))}
+    </>
+  );
+}
+
 export default function Home() {
   const [galleryIdx, setGalleryIdx] = useState(0);
   const swiperRef = useRef<SwiperClass | null>(null);
@@ -200,11 +251,11 @@ export default function Home() {
     <div className="flex min-h-screen w-full flex-col items-center bg-[#fafafa]">
       {/* 대표 이미지 */}
       <div
-        className="relative mx-auto flex w-full max-w-md flex-col items-center"
+        className="relative mx-auto flex w-full max-w-md flex-col items-center overflow-hidden"
         data-aos="fade-down"
       >
         <BGMPlayer />
-        <SparkleRain count={18} />
+        <SparkleRain count={18} /> <PetalRain count={18} />
         <div className="relative flex h-[100svh] w-full items-center justify-center bg-white">
           <Image
             src={galleryImages[0]}
