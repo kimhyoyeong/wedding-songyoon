@@ -10,8 +10,18 @@ import '@fontsource/great-vibes';
 import '@fontsource/noto-serif-kr';
 import type { Swiper as SwiperClass } from 'swiper';
 import duration from 'dayjs/plugin/duration';
+import Script from 'next/script';
 
 dayjs.extend(duration);
+
+// window.naver 타입 에러 해결
+
+declare global {
+  interface Window {
+    naver: unknown;
+    kakao: any;
+  }
+}
 
 const WEDDING_DATE = dayjs('2025-08-24T13:00:00');
 const today = dayjs();
@@ -107,6 +117,10 @@ export default function Home() {
     window.scrollTo(0, 0);
   }, []);
 
+  useEffect(() => {
+    // 지도 생성은 Script onLoad에서 처리
+  }, []);
+
   return (
     <div className="flex min-h-screen w-full flex-col items-center bg-[#fafafa]">
       {/* 대표 이미지 */}
@@ -156,7 +170,7 @@ export default function Home() {
             김윤환&nbsp;&nbsp;|&nbsp;&nbsp;김송희
           </div>
           <div className="text-[15px] text-gray-600">2025년 8월 24일 일요일 오후 1시</div>
-          <div className="text-[15px] text-gray-600">라루체 웨딩 </div>
+          <div className="text-[15px] text-gray-600">라루체 웨딩홀 </div>
         </section>
 
         {/* 인사말(시) 및 초대 문구 */}
@@ -189,15 +203,21 @@ export default function Home() {
           </div>
           {/* 시 */}
           <div className="text-[16px] leading-relaxed whitespace-pre-line text-gray-700">
-            두 사람이 꽃과 나무처럼 걸어와서
+            햇살처럼 따듯하게 안아주고
             <br />
-            서로의 모든 것이 되기 위해
+            곁에서 서로를 웃게 해주는
             <br />
-            오랜 기다림 끝에 혼례식을 치르는 날<br />
-            세상은 더욱 아름다워라
+            소중한 사람을 만났습니다.
             <br />
+            포근한 여름빛이 머무는 8월,
             <br />
-            이해인, {'<사랑의 사람들이어>'}
+            오롯이 서로를 향한 마음으로
+            <br />
+            조심스레 첫걸음을 내딛습니다.
+            <br />
+            그 소중한 순간을
+            <br />
+            함께해 주시면 감사하겠습니다.
           </div>
           {/* 초대장 타이틀 */}
           <div className="mt-8">
@@ -206,15 +226,6 @@ export default function Home() {
               소중한 분들을 초대합니다
             </div>
             <div className="text-[15px] leading-relaxed whitespace-pre-line text-gray-700">
-              살랑이는 바람결에
-              <br />
-              사랑이 묻어나는 계절입니다.
-              <br />
-              여기 곱고 예쁜 두 사람이 <span className="font-semibold text-[#b08a60]">사랑</span>을
-              맺어
-              <br />
-              인생의 반려자가 되려 합니다.
-              <br />
               새 인생을 시작하는 이 자리에 오셔서
               <br />
               <span className="font-semibold text-[#b08a60]">축복</span>해 주시면 감사하겠습니다.
@@ -410,20 +421,54 @@ export default function Home() {
           <div className="text-center font-semibold text-[#b08a60]">오시는 길</div>
           <div>
             <div className="flex items-center justify-center gap-2 text-sm text-black">
-              <FaMapMarkerAlt /> 노블발렌티 대구점 5층 발렌티홀
+              <FaMapMarkerAlt /> 명동 라루체 웨딩홀
             </div>
-            <p className="mt-1 text-center text-xs">대구 수성구 동대구로 45</p>
+            <p className="mt-1 text-center text-xs">서울특별시 중구 퇴계로 18길 46</p>
           </div>
 
-          <div className="mb-2 flex h-48 w-full items-center justify-center rounded bg-gray-200 text-gray-400">
-            <span>지도 이미지</span>
-          </div>
-          <div className="flex flex-col gap-1 text-xs text-gray-600">
-            <div className="flex items-center gap-1">
-              <FaSubway className="text-green-600" /> 2호선 범어역 5번 출구 도보 5분
+          {/* 카카오맵 지도 */}
+          <div
+            id="kakao-map"
+            style={{ width: '100%', height: 192, borderRadius: 8, overflow: 'hidden' }}
+          />
+          <Script
+            src={`//dapi.kakao.com/v2/maps/sdk.js?appkey=7e60cb452f34a8e29d0a9f5eaba7f790&autoload=false`}
+            strategy="afterInteractive"
+            onLoad={() => {
+              if (window.kakao && window.kakao.maps) {
+                window.kakao.maps.load(() => {
+                  const container = document.getElementById('kakao-map');
+                  const options = {
+                    center: new window.kakao.maps.LatLng(37.5607058, 126.9861774), // 서울 중구 퇴계로18길 46
+                    level: 3,
+                  };
+                  const map = new window.kakao.maps.Map(container, options);
+                  new window.kakao.maps.Marker({
+                    position: new window.kakao.maps.LatLng(37.5607058, 126.9861774),
+                    map,
+                    title: '라루체웨딩홀 (명동)',
+                  });
+                });
+              }
+            }}
+          />
+          <div className="flex flex-col gap-2 text-xs text-gray-600">
+            <div className="flex items-center gap-2">
+              <FaSubway className="text-green-600" size={16} />
+              <span>
+                <b>명동역</b> 4번 출구 <span className="text-gray-400">(도보 5분)</span>
+              </span>
             </div>
-            <div className="flex items-center gap-1">
-              <FaBus className="text-blue-600" /> 100, 100-1, 234, 349, 413 등 다수
+            <div className="flex items-start gap-2">
+              <FaBus className="text-blue-600" size={16} />
+              <div>
+                <div>
+                  <b>명동역</b> : 104, 105, 421, 463, 507, 604, N16, 7011
+                </div>
+                <div>
+                  <b>명동입구</b> : 104, 421, 463, 507, 604, N16, 7011, 05
+                </div>
+              </div>
             </div>
           </div>
         </section>
