@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client';
 
 import Image from 'next/image';
@@ -435,16 +436,17 @@ export default function Home() {
             src={`//dapi.kakao.com/v2/maps/sdk.js?appkey=7e60cb452f34a8e29d0a9f5eaba7f790&autoload=false`}
             strategy="afterInteractive"
             onLoad={() => {
-              if (window.kakao && window.kakao.maps) {
-                window.kakao.maps.load(() => {
+              const kakao = window.kakao as any;
+              if (kakao && kakao.maps) {
+                kakao.maps.load(() => {
                   const container = document.getElementById('kakao-map');
                   const options = {
-                    center: new window.kakao.maps.LatLng(37.5607058, 126.9861774), // 서울 중구 퇴계로18길 46
+                    center: new kakao.maps.LatLng(37.5607058, 126.9861774), // 서울 중구 퇴계로18길 46
                     level: 3,
                   };
-                  const map = new window.kakao.maps.Map(container, options);
-                  new window.kakao.maps.Marker({
-                    position: new window.kakao.maps.LatLng(37.5607058, 126.9861774),
+                  const map = new kakao.maps.Map(container, options);
+                  new kakao.maps.Marker({
+                    position: new kakao.maps.LatLng(37.5607058, 126.9861774),
                     map,
                     title: '라루체웨딩홀 (명동)',
                   });
