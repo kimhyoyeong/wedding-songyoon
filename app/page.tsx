@@ -20,7 +20,7 @@ dayjs.extend(duration);
 declare global {
   interface Window {
     naver: unknown;
-    kakao: any;
+    kakao: unknown;
   }
 }
 
