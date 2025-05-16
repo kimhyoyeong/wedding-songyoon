@@ -46,6 +46,7 @@ function AccountDropdown({
 
   const handleCopy = (acc: { bank: string; number: string; name: string }) => {
     navigator.clipboard.writeText(`${acc.bank} ${acc.number} ${acc.name}`);
+    alert('복사되었습니다.');
   };
 
   return (
