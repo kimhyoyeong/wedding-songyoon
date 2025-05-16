@@ -326,7 +326,10 @@ export default function Home() {
           <div className="pointer-events-none absolute bottom-20 left-1/2 -translate-x-1/2 select-none">
             <h1
               className="font-great-vibes animate-elegant-fade shine-clip-text text-center text-[60px] leading-[1.1] text-white sm:text-[70px]"
-              style={{ fontFamily: 'Great Vibes, cursive' }}
+              style={{
+                fontFamily: 'Great Vibes, cursive',
+                textShadow: '0 0 6px #fff8, 0 0 12px #89757a88',
+              }}
             >
               Our
               <br />
@@ -534,8 +537,9 @@ export default function Home() {
         </section>
         {/* 갤러리(슬라이드) */}
         <section className="py-6" data-aos="fade-up">
-          <div className="font-semiboldtext-[20px] mb-6 text-center text-[20px] font-semibold text-[#89757a]">
-            갤러리
+          <div className="mb-6 flex flex-col items-center gap-1">
+            <p className="text-xs tracking-widest text-[#89757a]">GALLERY</p>
+            <p className="text-[20px] font-semibold text-[#89757a]">갤러리</p>
           </div>
           <Swiper
             spaceBetween={8}
@@ -579,7 +583,10 @@ export default function Home() {
         </section>
         {/* 오시는 길 (지도) */}
         <section className="flex flex-col gap-6 px-8 py-6" data-aos="fade-up">
-          <div className="text-center text-[20px] font-semibold text-[#89757a]">오시는 길</div>
+          <div className="mb-6 flex flex-col items-center gap-1">
+            <p className="text-xs tracking-widest text-[#89757a]">LOCATION</p>
+            <p className="text-[20px] font-semibold text-[#89757a]">오시는 길</p>
+          </div>
           <div className="text-[16px] text-[#333]">
             <div className="flex items-center justify-center gap-2 font-semibold">
               <FaMapMarkerAlt /> 명동 라루체 웨딩홀
