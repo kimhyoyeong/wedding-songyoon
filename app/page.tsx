@@ -129,7 +129,7 @@ export default function Home() {
         className="relative mx-auto flex w-full max-w-md flex-col items-center"
         data-aos="fade-up"
       >
-        <div className="relative flex h-[100vh] w-full items-center justify-center bg-white">
+        <div className="relative flex h-[100svh] w-full items-center justify-center bg-white">
           <Image
             src={galleryImages[0]}
             alt="대표 이미지"
