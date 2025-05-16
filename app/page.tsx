@@ -53,7 +53,7 @@ function AccountDropdown({
       <button
         type="button"
         onClick={() => setOpen((v) => !v)}
-        className="flex w-full items-center justify-between bg-[#fbfbfb] px-4 py-3 text-[17px] font-medium text-gray-700"
+        className="flex w-full items-center justify-between bg-[#faf8f7] px-4 py-3 text-[17px] font-medium text-gray-700"
         style={{ borderRadius: 0 }}
       >
         {label}
@@ -110,9 +110,17 @@ function AccountDropdown({
   );
 }
 
-function BGMPlayer() {
+function BGMPlayer({ playTrigger }: { playTrigger?: boolean }) {
   const audioRef = useRef<HTMLAudioElement>(null);
   const [playing, setPlaying] = useState(false);
+
+  useEffect(() => {
+    if (playTrigger && !playing) {
+      audioRef.current?.play();
+      setPlaying(true);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [playTrigger]);
 
   const handlePlay = () => {
     audioRef.current?.play();
@@ -237,6 +245,8 @@ function PetalRain({ count = 18 }) {
 export default function Home() {
   const [galleryIdx, setGalleryIdx] = useState(0);
   const swiperRef = useRef<SwiperClass | null>(null);
+  const [showPopup, setShowPopup] = useState(true);
+  const [playBGM, setPlayBGM] = useState(false);
 
   useEffect(() => {
     AOS.init({ duration: 1000, easing: 'ease-out' });
@@ -248,14 +258,57 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="flex min-h-screen w-full flex-col items-center bg-[#fafafa]">
+    <div className="font-noto-serif flex min-h-screen w-full flex-col items-center bg-[#fafafa]">
+      {/* 팝업 */}
+      {showPopup && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/60 backdrop-blur-sm">
+          <div className="w-full max-w-xs rounded-2xl border border-[#e8dfdf] bg-white/90 px-8 py-10 text-center shadow-2xl">
+            {/* 상단 꽃 아이콘 */}
+            <div className="mb-4 flex justify-center">
+              <svg width="40" height="40" viewBox="0 0 48 48" fill="none">
+                <g>
+                  <ellipse cx="24" cy="24" rx="7" ry="7" fill="#cec3c3" fillOpacity="0.7" />
+                  <path
+                    d="M24 10c2.5-7 13-7 13 2.5 0 5-6 7-6 7s7-2 10 3c3 5-4 11-10 7 0 0 6 5 2 10-4 5-12 1-10-6 0 0-2 7-8 6-6-1-7-10 1-12 0 0-8-1-8-8 0-7 10-8 13-2.5z"
+                    fill="#e9e5e5"
+                    stroke="#cec3c3"
+                    strokeWidth="1.5"
+                    strokeLinejoin="round"
+                  />
+                  <circle cx="24" cy="24" r="3.5" fill="#fff" />
+                </g>
+              </svg>
+            </div>
+            <div className="mb-5 text-xl font-bold tracking-tight" style={{ color: '#89757a' }}>
+              소중한 당신을 초대합니다.
+            </div>
+            <div className="mb-6 text-sm" style={{ color: '#c2b2b2' }}>
+              아래 버튼을 누르면 음악과 함께 초대장이 열립니다.
+            </div>
+            <button
+              className="mt-2 w-full rounded-xl bg-[#89757a] px-4 py-3 text-base font-bold shadow-lg transition-transform duration-200 hover:scale-105"
+              style={{
+                color: '#fff',
+                boxShadow: '0 2px 8px 0 #e8dfdf',
+              }}
+              onClick={() => {
+                setShowPopup(false);
+                setPlayBGM(true);
+              }}
+            >
+              초대장 열기
+            </button>
+          </div>
+        </div>
+      )}
       {/* 대표 이미지 */}
       <div
         className="relative mx-auto flex w-full max-w-md flex-col items-center overflow-hidden"
         data-aos="fade-down"
       >
-        <BGMPlayer />
-        <SparkleRain count={18} /> <PetalRain count={18} />
+        <BGMPlayer playTrigger={playBGM} />
+        <SparkleRain count={18} />
+        <PetalRain count={18} />
         <div className="relative flex h-[100svh] w-full items-center justify-center bg-white">
           <Image
             src={galleryImages[0]}
@@ -313,15 +366,15 @@ export default function Home() {
               viewBox="0 0 48 48"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
-              className="text-[#b08a60]"
+              className="text-[#89757a]"
               style={{ display: 'inline-block' }}
             >
               <g>
-                <ellipse cx="24" cy="24" rx="6" ry="6" fill="#b08a60" fillOpacity="0.7" />
+                <ellipse cx="24" cy="24" rx="6" ry="6" fill="#89757a" fillOpacity="0.7" />
                 <path
                   d="M24 10c2.5-7 13-7 13 2.5 0 5-6 7-6 7s7-2 10 3c3 5-4 11-10 7 0 0 6 5 2 10-4 5-12 1-10-6 0 0-2 7-8 6-6-1-7-10 1-12 0 0-8-1-8-8 0-7 10-8 13-2.5z"
                   fill="#fff5e6"
-                  stroke="#b08a60"
+                  stroke="#89757a"
                   strokeWidth="1.5"
                   strokeLinejoin="round"
                 />
@@ -349,14 +402,14 @@ export default function Home() {
           </div>
           {/* 초대장 타이틀 */}
           <div className="mt-8">
-            <div className="mb-2 text-xs tracking-widest text-[#b08a60]">INVITATION</div>
+            <div className="mb-2 text-xs tracking-widest text-[#89757a]">INVITATION</div>
             <div className="mb-2 text-[17px] font-semibold text-gray-800">
               소중한 분들을 초대합니다
             </div>
             <div className="text-[15px] leading-relaxed whitespace-pre-line text-gray-700">
               새 인생을 시작하는 이 자리에 오셔서
               <br />
-              <span className="font-semibold text-[#b08a60]">축복</span>해 주시면 감사하겠습니다.
+              <span className="font-semibold text-[#89757a]">축복</span>해 주시면 감사하겠습니다.
             </div>
           </div>
         </section>
@@ -406,7 +459,7 @@ export default function Home() {
           </div>
         </section>
         {/* 캘린더 & D-day 타이머 */}
-        <section className="flex flex-col items-center gap-4 bg-[#fbfbfb] px-8 py-10 text-center">
+        <section className="flex flex-col items-center gap-4 bg-[#faf8f7] px-8 py-10 text-center">
           {/* 날짜 및 시간 */}
           <div className="text-center">
             <div className="mb-1 text-[24px] font-semibold tracking-widest text-gray-700">
@@ -467,7 +520,7 @@ export default function Home() {
               </tr>
               <tr>
                 <td className="h-8 w-8 align-middle text-red-400">
-                  <span className="mx-auto flex h-7 w-7 items-center justify-center rounded-full bg-[#b08a60] font-bold text-white">
+                  <span className="mx-auto flex h-7 w-7 items-center justify-center rounded-full bg-[#89757a] font-bold text-white">
                     24
                   </span>
                 </td>
@@ -503,7 +556,7 @@ export default function Home() {
         </section>
         {/* 갤러리(슬라이드) */}
         <section className="py-6" data-aos="fade-up">
-          <div className="font-semiboldtext-[20px] mb-6 text-center text-[20px] font-semibold text-[#b08a60]">
+          <div className="font-semiboldtext-[20px] mb-6 text-center text-[20px] font-semibold text-[#89757a]">
             갤러리
           </div>
           <Swiper
@@ -548,7 +601,7 @@ export default function Home() {
         </section>
         {/* 오시는 길 (지도) */}
         <section className="flex flex-col gap-6 px-8 py-6" data-aos="fade-up">
-          <div className="text-center text-[20px] font-semibold text-[#b08a60]">오시는 길</div>
+          <div className="text-center text-[20px] font-semibold text-[#89757a]">오시는 길</div>
           <div>
             <div className="flex items-center justify-center gap-2 text-sm text-black">
               <FaMapMarkerAlt /> 명동 라루체 웨딩홀
@@ -615,14 +668,14 @@ export default function Home() {
               height="32"
               viewBox="0 0 48 48"
               fill="none"
-              className="mx-auto mb-2 text-[#b08a60]"
+              className="mx-auto mb-2 text-[#89757a]"
             >
               <g>
-                <ellipse cx="24" cy="24" rx="6" ry="6" fill="#b08a60" fillOpacity="0.7" />
+                <ellipse cx="24" cy="24" rx="6" ry="6" fill="#89757a" fillOpacity="0.7" />
                 <path
                   d="M24 10c2.5-7 13-7 13 2.5 0 5-6 7-6 7s7-2 10 3c3 5-4 11-10 7 0 0 6 5 2 10-4 5-12 1-10-6 0 0-2 7-8 6-6-1-7-10 1-12 0 0-8-1-8-8 0-7 10-8 13-2.5z"
                   fill="#fff5e6"
-                  stroke="#b08a60"
+                  stroke="#89757a"
                   strokeWidth="1.5"
                   strokeLinejoin="round"
                 />
@@ -630,7 +683,7 @@ export default function Home() {
               </g>
             </svg>
           </div>
-          <div className="mb-2 text-[20px] font-semibold text-[#a07a50]">마음 전하실 곳</div>
+          <div className="mb-2 text-[18px] font-semibold text-[#89757a]">마음 전하실 곳</div>
           <AccountDropdown
             label="신랑측 계좌번호"
             accounts={[{ bank: '카카오뱅크', number: '1111111-111111', name: '김윤환' }]}

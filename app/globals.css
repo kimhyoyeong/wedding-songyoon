@@ -5,6 +5,19 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  /* Wedding custom palette */
+  --text-color: #544f4f;
+  --text-dark-color: #524548;
+  --text-light-color: #89757a;
+  --title-text-color: #89757a;
+  --subtitle-text-color: #c2b2b2;
+  --icon-color: #cec3c3;
+  --border-size: 0;
+  --border-color: #e8dfdf;
+  --border-light-color: #e9e5e5;
+  --main-bg: #faf8f7;
+  --card-bg: #fff;
+  --point-color: #89757a;
 }
 
 @layer utilities {
