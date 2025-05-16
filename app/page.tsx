@@ -86,7 +86,7 @@ function AccountDropdown({
               <div className="flex gap-2">
                 <button
                   onClick={() => handleCopy(acc)}
-                  className="flex items-center gap-1 border border-gray-300 bg-gray-50 px-3 py-1 text-[14px] text-gray-600 hover:bg-gray-100"
+                  className="flex items-center gap-1 bg-gray-50 px-3 py-1 text-[14px] text-gray-600 hover:bg-gray-100"
                   style={{ borderRadius: 0 }}
                 >
                   <svg
@@ -381,7 +381,7 @@ export default function Home() {
               <div className="mt-2">
                 <a
                   href="tel:01012345678"
-                  className="mt-4 flex items-center justify-center gap-2 rounded-3xl border border-gray-300 px-4 py-2 text-[16px] text-gray-500 transition hover:bg-gray-100"
+                  className="mt-4 flex items-center justify-center gap-2 rounded-3xl border border-gray-300 px-4 py-2 text-[14px] text-gray-500 transition hover:bg-gray-100"
                   style={{ width: 'fit-content', margin: '0 auto' }}
                 >
                   <FaPhoneAlt className="text-gray-400" />
@@ -394,8 +394,8 @@ export default function Home() {
               <span className="ml-1 font-semibold text-gray-800">김송희</span>
               <div className="mt-2">
                 <a
-                  href="tel:01087654321"
-                  className="mt-4 flex items-center justify-center gap-2 rounded-3xl border border-gray-300 px-4 py-2 text-[16px] text-gray-500 transition hover:bg-gray-100"
+                  href="tel:01050512473"
+                  className="mt-4 flex items-center justify-center gap-2 rounded-3xl border border-gray-300 px-4 py-2 text-[14px] text-gray-500 transition hover:bg-gray-100"
                   style={{ width: 'fit-content', margin: '0 auto' }}
                 >
                   <FaPhoneAlt className="text-gray-400" />
@@ -503,7 +503,9 @@ export default function Home() {
         </section>
         {/* 갤러리(슬라이드) */}
         <section className="py-6" data-aos="fade-up">
-          <div className="mb-6 text-center font-semibold text-[#b08a60]">갤러리</div>
+          <div className="font-semiboldtext-[20px] mb-6 text-center text-[20px] font-semibold text-[#b08a60]">
+            갤러리
+          </div>
           <Swiper
             spaceBetween={8}
             slidesPerView={1}
@@ -546,7 +548,7 @@ export default function Home() {
         </section>
         {/* 오시는 길 (지도) */}
         <section className="flex flex-col gap-6 px-8 py-6" data-aos="fade-up">
-          <div className="text-center font-semibold text-[#b08a60]">오시는 길</div>
+          <div className="text-center text-[20px] font-semibold text-[#b08a60]">오시는 길</div>
           <div>
             <div className="flex items-center justify-center gap-2 text-sm text-black">
               <FaMapMarkerAlt /> 명동 라루체 웨딩홀
@@ -631,11 +633,11 @@ export default function Home() {
           <div className="mb-2 text-[20px] font-semibold text-[#a07a50]">마음 전하실 곳</div>
           <AccountDropdown
             label="신랑측 계좌번호"
-            accounts={[{ bank: '신한', number: '110-123-456789', name: '김윤환' }]}
+            accounts={[{ bank: '카카오뱅크', number: '1111111-111111', name: '김윤환' }]}
           />
           <AccountDropdown
             label="신부측 계좌번호"
-            accounts={[{ bank: '국민', number: '200123-45-678900', name: '김송희' }]}
+            accounts={[{ bank: '카카오뱅크', number: '1111111-111111', name: '김송희' }]}
           />
         </section>
         {/* 푸터 */}
