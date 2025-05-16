@@ -102,3 +102,66 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+.sparkle {
+  position: fixed;
+  top: -30px;
+  pointer-events: none;
+  z-index: 10;
+  animation: sparkle-fall linear infinite;
+  filter: drop-shadow(0 0 6px #fffbe6) brightness(1.2);
+  opacity: 0.85;
+  will-change: transform, opacity;
+}
+
+@keyframes sparkle-fall {
+  0% {
+    transform: translateY(-30vh) scale(1) rotate(0deg);
+    opacity: 0.9;
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(110vh) scale(0.8) rotate(180deg);
+    opacity: 0;
+  }
+}
+
+.petal {
+  position: fixed;
+  top: -40px;
+  pointer-events: none;
+  z-index: 10;
+  animation: petal-fall linear infinite;
+  opacity: 0.4;
+  will-change: transform, opacity;
+}
+
+@keyframes petal-fall {
+  0% {
+    transform: translateY(-40vh) scale(1) rotate(0deg);
+    opacity: 0.9;
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(110vh) scale(0.8) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+@keyframes sparkle-twinkle {
+  0%,
+  100% {
+    filter: brightness(1) drop-shadow(0 0 2px #fffbe6);
+  }
+  50% {
+    filter: brightness(2.2) drop-shadow(0 0 8px #fffbe6);
+  }
+}
+
+.sparkle svg {
+  animation: sparkle-twinkle 1.2s infinite;
+}

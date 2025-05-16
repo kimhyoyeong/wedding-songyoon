@@ -138,6 +138,102 @@ function BGMPlayer() {
   );
 }
 
+function SparkleRain({ count = 24 }) {
+  const [sparkles, setSparkles] = useState([]);
+
+  useEffect(() => {
+    const arr = [];
+    for (let i = 0; i < count; i++) {
+      arr.push({
+        id: i,
+        left: Math.random() * 100, // vw
+        delay: Math.random() * 5, // s
+        duration: 3 + Math.random() * 2, // s
+        size: 8 + Math.random() * 10, // px
+      });
+    }
+    setSparkles(arr);
+  }, [count]);
+
+  return (
+    <>
+      {sparkles.map((s) => (
+        <div
+          key={s.id}
+          className="sparkle"
+          style={{
+            left: `${s.left}vw`,
+            animationDelay: `${s.delay}s`,
+            animationDuration: `${s.duration}s`,
+            width: s.size,
+            height: s.size,
+            top: -20,
+          }}
+        >
+          {/* SVG 별/글리터 */}
+          <svg width={s.size} height={s.size} viewBox="0 0 20 20" fill="none">
+            <g>
+              <circle cx="10" cy="10" r="4" fill="#fffbe6" />
+              <circle cx="10" cy="10" r="2" fill="#ffe082" />
+            </g>
+          </svg>
+        </div>
+      ))}
+    </>
+  );
+}
+
+function PetalRain({ count = 18 }) {
+  const [petals, setPetals] = useState([]);
+
+  useEffect(() => {
+    const arr = [];
+    for (let i = 0; i < count; i++) {
+      arr.push({
+        id: i,
+        left: Math.random() * 100, // vw
+        delay: Math.random() * 6, // s
+        duration: 7 + Math.random() * 4, // s
+        size: 18 + Math.random() * 18, // px
+        rotate: Math.random() * 360, // deg
+      });
+    }
+    setPetals(arr);
+  }, [count]);
+
+  return (
+    <>
+      {petals.map((p) => (
+        <div
+          key={p.id}
+          className="petal"
+          style={{
+            left: `${p.left}vw`,
+            animationDelay: `${p.delay}s`,
+            animationDuration: `${p.duration}s`,
+            width: p.size,
+            height: p.size,
+            top: -25,
+            transform: `rotate(${p.rotate}deg)`,
+            opacity: 0.75,
+          }}
+        >
+          {/* SVG 벚꽃잎 (또는 풀잎) */}
+          <svg width={p.size} height={p.size} viewBox="0 0 32 32" fill="none">
+            {/* 벚꽃잎 예시 */}
+            <path
+              d="M16 2 C18 8, 30 10, 16 30 C2 10, 14 8, 16 2 Z"
+              fill="#f9c9d2"
+              stroke="#e7a1b0"
+              strokeWidth="1"
+            />
+          </svg>
+        </div>
+      ))}
+    </>
+  );
+}
+
 export default function Home() {
   const [galleryIdx, setGalleryIdx] = useState(0);
   const swiperRef = useRef<SwiperClass | null>(null);
@@ -158,6 +254,8 @@ export default function Home() {
         className="relative mx-auto flex w-full max-w-md flex-col items-center"
         data-aos="fade-up"
       >
+        <SparkleRain count={18} />
+        {/* <PetalRain count={18} /> */}
         <BGMPlayer />
         <div className="relative flex h-[100svh] w-full items-center justify-center bg-white">
           <Image
@@ -192,7 +290,7 @@ export default function Home() {
       </div>
       {/* 본문 카드 */}
       <div
-        className="font-noto-serif mx-auto mt-0 flex w-full max-w-md flex-col gap-8 bg-white px-0 pb-10 text-black shadow-lg"
+        className="font-noto-serif mx-auto mt-0 flex w-full max-w-md flex-col gap-8 bg-white px-0 pb-10 text-black"
         data-aos="fade-up"
       >
         {/* 날짜/장소 */}
