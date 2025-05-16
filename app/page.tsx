@@ -213,7 +213,7 @@ function PetalRain({ count = 18 }) {
             animationDuration: `${p.duration}s`,
             width: p.size,
             height: p.size,
-            top: -25,
+            top: -30,
             transform: `rotate(${p.rotate}deg)`,
             opacity: 0.75,
           }}
