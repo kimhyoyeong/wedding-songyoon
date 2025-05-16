@@ -5,7 +5,7 @@ import Image from 'next/image';
 import { useState, useEffect, useRef } from 'react';
 import dayjs from 'dayjs';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { FaPhoneAlt, FaSubway, FaBus, FaMapMarkerAlt } from 'react-icons/fa';
+import { FaPhoneAlt, FaSubway, FaBus, FaMapMarkerAlt, FaParking } from 'react-icons/fa';
 import AOS from 'aos';
 import '@fontsource/great-vibes';
 import '@fontsource/noto-serif-kr';
@@ -246,6 +246,7 @@ export default function Home() {
   const [galleryIdx, setGalleryIdx] = useState(0);
   const swiperRef = useRef<SwiperClass | null>(null);
   const [showPopup, setShowPopup] = useState(true);
+  const [fadeOut, setFadeOut] = useState(false);
   const [playBGM, setPlayBGM] = useState(false);
 
   useEffect(() => {
@@ -257,11 +258,18 @@ export default function Home() {
     // 지도 생성은 Script onLoad에서 처리
   }, []);
 
+  const handleClose = () => {
+    setFadeOut(true);
+    setTimeout(() => setShowPopup(false), 500); // 0.5초 후 완전 제거
+  };
+
   return (
     <div className="font-noto-serif flex min-h-screen w-full flex-col items-center bg-[#fafafa]">
       {/* 팝업 */}
       {showPopup && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/60 backdrop-blur-sm">
+        <div
+          className={`fixed inset-0 z-[100] flex items-center justify-center bg-black/60 backdrop-blur-sm transition-opacity duration-500 ${fadeOut ? 'opacity-0' : 'opacity-100'}`}
+        >
           <div className="w-full max-w-xs rounded-2xl border border-[#e8dfdf] bg-white/90 px-8 py-10 text-center shadow-2xl">
             {/* 상단 꽃 아이콘 */}
             <div className="mb-4 flex justify-center">
@@ -280,7 +288,7 @@ export default function Home() {
                 boxShadow: '0 2px 8px 0 #e8dfdf',
               }}
               onClick={() => {
-                setShowPopup(false);
+                handleClose();
                 setPlayBGM(true);
               }}
             >
@@ -571,11 +579,11 @@ export default function Home() {
         {/* 오시는 길 (지도) */}
         <section className="flex flex-col gap-6 px-8 py-6" data-aos="fade-up">
           <div className="text-center text-[20px] font-semibold text-[#89757a]">오시는 길</div>
-          <div className="text-[#333]">
-            <div className="flex items-center justify-center gap-2 text-sm text-[15px]">
+          <div className="text-[16px] text-[#333]">
+            <div className="flex items-center justify-center gap-2 font-semibold">
               <FaMapMarkerAlt /> 명동 라루체 웨딩홀
             </div>
-            <p className="mt-1 text-center text-xs text-[12px]">서울특별시 중구 퇴계로 18길 46</p>
+            <p className="mt-1 text-center">서울특별시 중구 퇴계로 18길 46</p>
           </div>
 
           {/* 카카오맵 지도 */}
@@ -605,21 +613,57 @@ export default function Home() {
               }
             }}
           />
-          <div className="flex flex-col gap-2 text-xs text-[14px] text-[#333]">
-            <div className="flex items-center gap-2">
-              <FaSubway className="text-green-600" size={16} />
-              <span>
-                <strong>명동역</strong> 4번 출구 (도보 5분)
-              </span>
-            </div>
-            <div className="flex items-start gap-2">
-              <FaBus className="text-blue-600" size={16} />
-              <div>
-                <div>
-                  <strong>명동역</strong> : 104, 105, 421, 463, 507, 604, N16, 7011
+          <div className="flex flex-col gap-6 rounded-xl border border-[#e8dfdf] bg-white/90 p-6">
+            {/* 지하철 */}
+            <div className="flex items-start gap-4">
+              <FaSubway className="text-[#cec3c3]" size={28} />
+              <div className="flex-1">
+                <div className="mb-1 font-bold text-[#524548]">지하철</div>
+                <div className="text-[15px] leading-relaxed text-[#544f4f]">
+                  <span className="font-semibold">4호선 명동역 3번출구</span> (퍼시픽 호텔 우측길로
+                  60M)
                 </div>
-                <div>
-                  <strong>명동입구</strong> : 104, 421, 463, 507, 604, N16, 7011, 05
+              </div>
+            </div>
+            <hr className="border-t border-[#e8dfdf]" />
+            {/* 버스 */}
+            <div className="flex items-start gap-4">
+              <FaBus className="text-[#cec3c3]" size={28} />
+              <div className="flex-1">
+                <div className="mb-1 font-bold text-[#524548]">버스</div>
+                <div className="text-[15px] leading-relaxed text-[#544f4f]">
+                  <span className="font-semibold">퇴계로2가.명동역</span> <br />
+                  104, 105, 421, 463, 507, 604, N16, 7011 <br />
+                  <br />
+                  <span className="font-semibold">명동입구</span> <br />
+                  104, 421, 463, 507, 604, N16, 7011, 05
+                </div>
+              </div>
+            </div>
+            <hr className="border-t border-[#e8dfdf]" />
+            {/* 자가용 */}
+            <div className="flex items-start gap-4">
+              <FaParking className="text-[#cec3c3]" size={28} />
+              <div className="flex-1">
+                <div className="mb-1 font-bold text-[#524548]">자가용</div>
+                <div className="text-[15px] leading-relaxed text-[#544f4f]">
+                  <span className="font-semibold">강남에서 오실때</span>
+                  <br />
+                  반포대교 &gt; 남산3호터널 &gt; 통과 후, 쌍용 플레티넘 아파트 옆에서 우회전 &gt;
+                  아파트 끼고 좌회전 후 라루체 진입
+                  <br />
+                  <br />
+                  <span className="font-semibold">서울역에서 오실때</span>
+                  <br />
+                  서울역에서 퇴계로 방면으로 진입 &gt; 회현역 &gt; 회현사거리에서 직진 &gt;
+                  스테이트타워와 뉴오리엔탈호텔 사이로 우회전 &gt; 왼쪽 첫번째 골목 라루체
+                  <br />
+                  <br />
+                  <span className="font-semibold">왕십리방향에서 오실때</span>
+                  <br />
+                  왕십리역 &gt; 퇴계로에서 남대문 방향으로 직진 &gt; 퇴계로2가 지하차도 &gt;
+                  회현사거리 신세계백화점 앞에서 유턴 후 직진 &gt; 스테이트타워와 뉴오리엔탈호텔
+                  사이로 우회전 &gt; 왼쪽 첫번째 골목 라루체
                 </div>
               </div>
             </div>
