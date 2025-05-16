@@ -1,0 +1,104 @@
+@import 'tailwindcss';
+@import 'swiper/css';
+@import 'aos/dist/aos.css';
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@layer utilities {
+  .font-great-vibes {
+    font-family: 'Great Vibes', cursive !important;
+  }
+  .font-noto-serif {
+    font-family: 'Noto Serif KR', serif !important;
+  }
+  .animate-elegant-fade {
+    animation: elegant-fade-in 2s cubic-bezier(0.23, 1, 0.32, 1);
+  }
+  @keyframes elegant-fade-in {
+    0% {
+      opacity: 0;
+      transform: translateY(-100px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  .shine-text {
+    position: relative;
+    overflow: hidden;
+  }
+  .shine-text::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -75%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(
+      120deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.7) 50%,
+      transparent 100%
+    );
+    animation: shine-move 2.2s cubic-bezier(0.4, 0.7, 0.4, 1) both;
+    pointer-events: none;
+  }
+  @keyframes shine-move {
+    0% {
+      left: -200%;
+    }
+    100% {
+      left: 200%;
+    }
+  }
+  .shine-clip-text {
+    background: linear-gradient(
+      120deg,
+      rgba(255, 255, 255, 0.2) 0%,
+      rgba(255, 255, 255, 0.4) 25%,
+      rgba(255, 255, 255, 1) 50%,
+      rgba(255, 255, 255, 0.4) 75%,
+      rgba(255, 255, 255, 0.2) 100%
+    );
+    background-size: 200% auto;
+    background-position: 0% 0;
+    color: transparent;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shine-clip-move 2.5s ease-in-out infinite both;
+  }
+
+  @keyframes shine-clip-move {
+    0% {
+      background-position: 0% 0;
+    }
+    50% {
+      background-position: 90% 0;
+    }
+  }
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}

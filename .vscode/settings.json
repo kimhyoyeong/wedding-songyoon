@@ -1,0 +1,8 @@
+{
+    "typescript.tsdk": "node_modules/typescript/lib",//프로젝트에 설치된 TypeScript 버전을 사용하게 함.
+    "editor.codeActionsOnSave": { "source.fixAll": "explicit" },
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.tabSize": 2,
+    "css.lint.unknownAtRules": "ignore"
+  }
