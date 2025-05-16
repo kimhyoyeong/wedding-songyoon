@@ -12,6 +12,7 @@ import '@fontsource/noto-serif-kr';
 import type { Swiper as SwiperClass } from 'swiper';
 import duration from 'dayjs/plugin/duration';
 import Script from 'next/script';
+import { FiVolume2, FiVolumeX } from 'react-icons/fi';
 
 dayjs.extend(duration);
 
@@ -109,6 +110,34 @@ function AccountDropdown({
   );
 }
 
+function BGMPlayer() {
+  const audioRef = useRef<HTMLAudioElement>(null);
+  const [playing, setPlaying] = useState(false);
+
+  const handlePlay = () => {
+    audioRef.current?.play();
+    setPlaying(true);
+  };
+
+  const handlePause = () => {
+    audioRef.current?.pause();
+    setPlaying(false);
+  };
+
+  return (
+    <div className="fixed top-6 right-6 z-50">
+      <audio ref={audioRef} src="/music/sample.mp3" loop style={{ display: 'none' }} />
+      <button
+        onClick={playing ? handlePause : handlePlay}
+        aria-label={playing ? '음악 끄기' : '음악 켜기'}
+        className={`flex items-center justify-center rounded-full transition-all duration-200 ease-in-out ${playing ? 'text-[#fff]' : 'text-[#fff]'} `}
+      >
+        {playing ? <FiVolume2 size={28} /> : <FiVolumeX size={28} />}
+      </button>
+    </div>
+  );
+}
+
 export default function Home() {
   const [galleryIdx, setGalleryIdx] = useState(0);
   const swiperRef = useRef<SwiperClass | null>(null);
@@ -129,6 +158,7 @@ export default function Home() {
         className="relative mx-auto flex w-full max-w-md flex-col items-center"
         data-aos="fade-up"
       >
+        <BGMPlayer />
         <div className="relative flex h-[100svh] w-full items-center justify-center bg-white">
           <Image
             src={galleryImages[0]}

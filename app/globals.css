@@ -70,7 +70,7 @@
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
-    animation: shine-clip-move 2.5s ease-in-out infinite both;
+    animation: shine-clip-move 4s ease-in-out infinite both;
   }
 
   @keyframes shine-clip-move {
