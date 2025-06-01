@@ -1,10 +1,18 @@
 import React, { useState, useEffect } from 'react';
 
+type Sparkle = {
+  id: number;
+  left: number;
+  delay: number;
+  duration: number;
+  size: number;
+};
+
 export default function SparkleRain({ count = 24 }: { count?: number }) {
-  const [sparkles, setSparkles] = useState<any[]>([]);
+  const [sparkles, setSparkles] = useState<Sparkle[]>([]);
 
   useEffect(() => {
-    const arr = [];
+    const arr: Sparkle[] = [];
     for (let i = 0; i < count; i++) {
       arr.push({
         id: i,
