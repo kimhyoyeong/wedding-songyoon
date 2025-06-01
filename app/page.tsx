@@ -43,10 +43,29 @@ function BGMPlayer({ playTrigger }: { playTrigger?: boolean }) {
   const [playing, setPlaying] = useState(false);
 
   useEffect(() => {
-    if (playTrigger && !playing) {
+    const handleVisibilityChange = () => {
+      if (document.hidden) {
+        audioRef.current?.pause();
+        setPlaying(false);
+      } else {
+        // 다시 보이면 재생
+        if (playTrigger) {
+          audioRef.current?.play();
+          setPlaying(true);
+        }
+      }
+    };
+
+    if (playTrigger && !playing && !document.hidden) {
       audioRef.current?.play();
       setPlaying(true);
     }
+
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+
+    return () => {
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [playTrigger]);
 
