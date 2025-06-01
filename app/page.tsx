@@ -270,7 +270,7 @@ export default function Home() {
                   </div>
                   <a
                     href="tel:01050525951"
-                    className="mt-4 flex items-center justify-center gap-2 rounded-3xl border border-[#e8dfdf] px-2 py-1 text-[14px] text-[#89757a] transition hover:bg-gray-100"
+                    className="mt-4 flex items-center justify-center gap-2 rounded-full border border-[#e8dfdf] p-2 text-[14px] text-[#89757a] transition hover:bg-gray-100"
                     style={{ width: 'fit-content', margin: '0 auto' }}
                   >
                     <FaPhoneAlt />
@@ -282,7 +282,7 @@ export default function Home() {
                   </div>
                   <a
                     href="tel:01052355758"
-                    className="mt-4 flex items-center justify-center gap-2 rounded-3xl border border-[#e8dfdf] px-2 py-1 text-[14px] text-[#89757a] transition hover:bg-gray-100"
+                    className="mt-4 flex items-center justify-center gap-2 rounded-full border border-[#e8dfdf] p-2 text-[14px] text-[#89757a] transition hover:bg-gray-100"
                     style={{ width: 'fit-content', margin: '0 auto' }}
                   >
                     <FaPhoneAlt />
@@ -294,7 +294,7 @@ export default function Home() {
                   </div>
                   <a
                     href="tel:01036065951"
-                    className="mt-4 flex items-center justify-center gap-2 rounded-3xl border border-[#e8dfdf] px-2 py-1 text-[14px] text-[#89757a] transition hover:bg-gray-100"
+                    className="mt-4 flex items-center justify-center gap-2 rounded-full border border-[#e8dfdf] p-2 text-[14px] text-[#89757a] transition hover:bg-gray-100"
                     style={{ width: 'fit-content', margin: '0 auto' }}
                   >
                     <FaPhoneAlt />
@@ -311,7 +311,7 @@ export default function Home() {
                   </div>
                   <a
                     href="tel:01050512473"
-                    className="mt-4 flex items-center justify-center gap-2 rounded-3xl border border-[#e8dfdf] px-2 py-1 text-[14px] text-[#89757a] transition hover:bg-gray-100"
+                    className="mt-4 flex items-center justify-center gap-2 rounded-full border border-[#e8dfdf] p-2 text-[14px] text-[#89757a] transition hover:bg-gray-100"
                     style={{ width: 'fit-content', margin: '0 auto' }}
                   >
                     <FaPhoneAlt />
@@ -324,7 +324,7 @@ export default function Home() {
                   {brideFather === '백주선' && (
                     <a
                       href="tel:01062685140"
-                      className="mt-4 flex items-center justify-center gap-2 rounded-3xl border border-[#e8dfdf] px-2 py-1 text-[14px] text-[#89757a] transition hover:bg-gray-100"
+                      className="mt-4 flex items-center justify-center gap-2 rounded-full border border-[#e8dfdf] p-2 text-[14px] text-[#89757a] transition hover:bg-gray-100"
                       style={{ width: 'fit-content', margin: '0 auto' }}
                     >
                       <FaPhoneAlt />
@@ -337,7 +337,7 @@ export default function Home() {
                   </div>
                   <a
                     href="tel:01037362473"
-                    className="mt-4 flex items-center justify-center gap-2 rounded-3xl border border-[#e8dfdf] px-2 py-1 text-[14px] text-[#89757a] transition hover:bg-gray-100"
+                    className="mt-4 flex items-center justify-center gap-2 rounded-full border border-[#e8dfdf] p-2 text-[14px] text-[#89757a] transition hover:bg-gray-100"
                     style={{ width: 'fit-content', margin: '0 auto' }}
                   >
                     <FaPhoneAlt />
