@@ -13,6 +13,15 @@ import type { Swiper as SwiperClass } from 'swiper';
 import duration from 'dayjs/plugin/duration';
 import Script from 'next/script';
 import { FiVolume2, FiVolumeX } from 'react-icons/fi';
+import { useQueryParams } from './hooks/useQueryParams';
+import BrideInfo from './components/BrideInfo';
+import BrideAccountsDropdown from './components/BrideAccountsDropdown';
+import AccountDropdown from './components/AccountDropdown';
+import galleryImages from './data/galleryImages';
+import { groomAccounts } from './data/accounts';
+import SparkleRain from './components/SparkleRain';
+import PetalRain from './components/PetalRain';
+import { weddingLocation, subwayInfo, busInfo, carInfo } from './data/location';
 
 dayjs.extend(duration);
 
@@ -28,96 +37,6 @@ declare global {
 const WEDDING_DATE = dayjs('2025-08-24T13:00:00');
 const today = dayjs();
 const dday = WEDDING_DATE.diff(today, 'day');
-
-const galleryImages = [
-  '/images/KakaoTalk_20250516_200424715_01.jpg',
-  '/images/RSM_3610.jpg',
-  '/images/KakaoTalk_20250516_200424715_02.jpg',
-  '/images/RSM_3723.jpg',
-  '/images/RSM_3750.jpg',
-  '/images/RSM_3754.jpg',
-  '/images/RSM_3887.jpg',
-  '/images/RSM_3896.jpg',
-  '/images/RSM_4453.jpg',
-  '/images/RSM_4472.jpg',
-];
-
-function AccountDropdown({
-  label,
-  accounts,
-}: {
-  label: string;
-  accounts: { bank: string; number: string; name: string; pay?: boolean }[];
-}) {
-  const [open, setOpen] = useState(false);
-
-  const handleCopy = (acc: { bank: string; number: string; name: string }) => {
-    navigator.clipboard.writeText(`${acc.bank} ${acc.number} ${acc.name}`);
-    alert('복사되었습니다.');
-  };
-
-  return (
-    <div className="w-full">
-      <button
-        type="button"
-        onClick={() => setOpen((v) => !v)}
-        className="flex w-full items-center justify-between bg-[#faf8f7] px-4 py-3 text-[16px] font-medium text-[#524548]"
-        style={{ borderRadius: 0 }}
-      >
-        {label}
-        <svg
-          className={`ml-2 h-5 w-5 transition-transform ${open ? 'rotate-180' : ''}`}
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          viewBox="0 0 24 24"
-        >
-          <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
-        </svg>
-      </button>
-      <div
-        className={`overflow-hidden bg-white transition-all duration-300 ease-in-out ${open ? 'max-h-[200px] translate-y-0 opacity-100' : 'max-h-0 -translate-y-2 opacity-0'} `}
-        style={{ borderRadius: 0 }}
-      >
-        {accounts.map((acc, idx) => (
-          <div
-            key={idx}
-            className={`flex items-center justify-between px-4 py-3 ${
-              idx !== accounts.length - 1 ? 'border-b border-gray-100' : ''
-            }`}
-            style={{ borderRadius: 0 }}
-          >
-            <div className="text-left">
-              <div className="text-[15px] text-[#524548]">
-                {acc.bank} {acc.number}
-              </div>
-              <div className="text-[15px] text-gray-500">{acc.name}</div>
-            </div>
-            <div className="flex gap-2">
-              <button
-                onClick={() => handleCopy(acc)}
-                className="flex items-center gap-1 bg-gray-50 px-3 py-1 text-[14px] text-[#333] hover:bg-gray-100"
-                style={{ borderRadius: 0 }}
-              >
-                <svg
-                  className="h-4 w-4 text-gray-400"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  viewBox="0 0 24 24"
-                >
-                  <rect x="9" y="9" width="13" height="13" rx="2" />
-                  <rect x="3" y="3" width="13" height="13" rx="2" />
-                </svg>
-                복사
-              </button>
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-}
 
 function BGMPlayer({ playTrigger }: { playTrigger?: boolean }) {
   const audioRef = useRef<HTMLAudioElement>(null);
@@ -155,108 +74,18 @@ function BGMPlayer({ playTrigger }: { playTrigger?: boolean }) {
   );
 }
 
-function SparkleRain({ count = 24 }) {
-  const [sparkles, setSparkles] = useState([]);
-
-  useEffect(() => {
-    const arr = [];
-    for (let i = 0; i < count; i++) {
-      arr.push({
-        id: i,
-        left: Math.random() * 100, // vw
-        delay: Math.random() * 5, // s
-        duration: 3 + Math.random() * 2, // s
-        size: 8 + Math.random() * 10, // px
-      });
-    }
-    setSparkles(arr);
-  }, [count]);
-
-  return (
-    <>
-      {sparkles.map((s) => (
-        <div
-          key={s.id}
-          className="sparkle"
-          style={{
-            left: `${s.left}vw`,
-            animationDelay: `${s.delay}s`,
-            animationDuration: `${s.duration}s`,
-            width: s.size,
-            height: s.size,
-            top: -20,
-          }}
-        >
-          {/* SVG 별/글리터 */}
-          <svg width={s.size} height={s.size} viewBox="0 0 20 20" fill="none">
-            <g>
-              <circle cx="10" cy="10" r="4" fill="#fffbe6" />
-              <circle cx="10" cy="10" r="2" fill="#ffe082" />
-            </g>
-          </svg>
-        </div>
-      ))}
-    </>
-  );
-}
-
-function PetalRain({ count = 18 }) {
-  const [petals, setPetals] = useState([]);
-
-  useEffect(() => {
-    const arr = [];
-    for (let i = 0; i < count; i++) {
-      arr.push({
-        id: i,
-        left: Math.random() * 100, // vw
-        delay: Math.random() * 6, // s
-        duration: 7 + Math.random() * 4, // s
-        size: 18 + Math.random() * 18, // px
-        rotate: Math.random() * 360, // deg
-      });
-    }
-    setPetals(arr);
-  }, [count]);
-
-  return (
-    <>
-      {petals.map((p) => (
-        <div
-          key={p.id}
-          className="petal"
-          style={{
-            left: `${p.left}vw`,
-            animationDelay: `${p.delay}s`,
-            animationDuration: `${p.duration}s`,
-            width: p.size,
-            height: p.size,
-            top: -30,
-            transform: `rotate(${p.rotate}deg)`,
-            opacity: 0.75,
-          }}
-        >
-          {/* SVG 벚꽃잎 (또는 풀잎) */}
-          <svg width={p.size} height={p.size} viewBox="0 0 32 32" fill="none">
-            {/* 벚꽃잎 예시 */}
-            <path
-              d="M16 2 C18 8, 30 10, 16 30 C2 10, 14 8, 16 2 Z"
-              fill="#f9c9d2"
-              stroke="#e7a1b0"
-              strokeWidth="1"
-            />
-          </svg>
-        </div>
-      ))}
-    </>
-  );
-}
-
 export default function Home() {
   const [galleryIdx, setGalleryIdx] = useState(0);
   const swiperRef = useRef<SwiperClass | null>(null);
   const [showPopup, setShowPopup] = useState(true);
   const [fadeOut, setFadeOut] = useState(false);
   const [playBGM, setPlayBGM] = useState(false);
+
+  const params = useQueryParams();
+
+  // 신부 부모 정보
+  const father = params?.has('ver1') ? '백주선' : params?.get('bride_father') || '故김복규';
+  const mother = params?.get('bride_mother') || '송영미';
 
   useEffect(() => {
     AOS.init({ duration: 1000, easing: 'ease-out' });
@@ -359,7 +188,7 @@ export default function Home() {
             김윤환&nbsp;&nbsp;|&nbsp;&nbsp;김송희
           </div>
           <div className="text-[17px] text-[#333]">2025년 8월 24일 일요일 오후 1시</div>
-          <div className="text-[17px] text-[#333]">라루체 웨딩홀 </div>
+          <div className="text-[17px] text-[#333]">라루체 웨딩홀 루아르홀</div>
         </section>
 
         {/* 인사말(시) 및 초대 문구 */}
@@ -425,7 +254,15 @@ export default function Home() {
           <div className="mt-6 mb-2 flex w-full max-w-md justify-between text-[18px] leading-relaxed text-[#524548]">
             {/* 신랑 */}
             <div className="flex flex-1 flex-col items-center">
-              <strong className="ml-1 font-semibold text-[#333]">김윤환</strong>
+              <div className="flex flex-col items-center">
+                <div className="text-[18px] text-[#000]">
+                  <span className="font-semibold">신랑</span> 김윤환
+                </div>
+                <div className="mt-1 text-[13px] text-[#89757a]">
+                  <span className="font-semibold">부</span> 김 철&nbsp;&nbsp;
+                  <span className="font-semibold">모</span> 권조희
+                </div>
+              </div>
               <div className="mt-2">
                 <a
                   href="tel:01012345678"
@@ -439,7 +276,11 @@ export default function Home() {
             </div>
             {/* 신부 */}
             <div className="flex flex-1 flex-col items-center">
-              <strong className="ml-1 font-semibold text-[#333]">김송희</strong>
+              <div className="text-[18px] text-[#000]">
+                <span className="font-semibold">신부</span> 김송희
+              </div>
+              {/* 신부 부모 정보: 주소 파라미터에서 받아오기 */}
+              <BrideInfo father={father} mother={mother} />
               <div className="mt-2">
                 <a
                   href="tel:01050512473"
@@ -610,9 +451,9 @@ export default function Home() {
           </div>
           <div className="text-[16px] text-[#333]">
             <div className="flex items-center justify-center gap-2 font-semibold">
-              <FaMapMarkerAlt /> 명동 라루체 웨딩홀
+              <FaMapMarkerAlt /> {weddingLocation.name}
             </div>
-            <p className="mt-1 text-center">서울특별시 중구 퇴계로 18길 46</p>
+            <p className="mt-1 text-center">{weddingLocation.address}</p>
           </div>
 
           {/* 카카오맵 지도 */}
@@ -629,14 +470,14 @@ export default function Home() {
                 kakao.maps.load(() => {
                   const container = document.getElementById('kakao-map');
                   const options = {
-                    center: new kakao.maps.LatLng(37.559185, 126.984395), // 서울 중구 퇴계로18길 46
+                    center: new kakao.maps.LatLng(weddingLocation.lat, weddingLocation.lng),
                     level: 4,
                   };
                   const map = new kakao.maps.Map(container, options);
                   new kakao.maps.Marker({
-                    position: new kakao.maps.LatLng(37.559185, 126.984395),
+                    position: new kakao.maps.LatLng(weddingLocation.lat, weddingLocation.lng),
                     map,
-                    title: '라루체웨딩홀 (명동)',
+                    title: weddingLocation.name,
                   });
                 });
               }
@@ -647,11 +488,8 @@ export default function Home() {
             <div className="flex items-start gap-4">
               <FaSubway className="text-[#cec3c3]" size={28} />
               <div className="flex-1">
-                <div className="mb-1 font-bold text-[#524548]">지하철</div>
-                <div className="text-[15px] leading-relaxed text-[#544f4f]">
-                  <span className="font-semibold">4호선 명동역 3번출구</span> (퍼시픽 호텔 우측길로
-                  60M)
-                </div>
+                <div className="mb-1 font-bold text-[#524548]">{subwayInfo.title}</div>
+                <div className="text-[15px] leading-relaxed text-[#544f4f]">{subwayInfo.desc}</div>
               </div>
             </div>
             <hr className="border-t border-[#e8dfdf]" />
@@ -659,13 +497,12 @@ export default function Home() {
             <div className="flex items-start gap-4">
               <FaBus className="text-[#cec3c3]" size={28} />
               <div className="flex-1">
-                <div className="mb-1 font-bold text-[#524548]">버스</div>
-                <div className="text-[15px] leading-relaxed text-[#544f4f]">
-                  <span className="font-semibold">퇴계로2가.명동역</span> <br />
-                  104, 105, 421, 463, 507, 604, N16, 7011 <br />
-                  <br />
-                  <span className="font-semibold">명동입구</span> <br />
-                  104, 421, 463, 507, 604, N16, 7011, 05
+                <div className="mb-1 font-bold text-[#524548]">{busInfo.title}</div>
+                <div
+                  className="text-[15px] leading-relaxed text-[#544f4f]"
+                  style={{ whiteSpace: 'pre-line' }}
+                >
+                  {busInfo.desc}
                 </div>
               </div>
             </div>
@@ -674,25 +511,12 @@ export default function Home() {
             <div className="flex items-start gap-4">
               <FaParking className="text-[#cec3c3]" size={28} />
               <div className="flex-1">
-                <div className="mb-1 font-bold text-[#524548]">자가용</div>
-                <div className="text-[15px] leading-relaxed text-[#544f4f]">
-                  <span className="font-semibold">강남에서 오실때</span>
-                  <br />
-                  반포대교 &gt; 남산3호터널 &gt; 통과 후, 쌍용 플레티넘 아파트 옆에서 우회전 &gt;
-                  아파트 끼고 좌회전 후 라루체 진입
-                  <br />
-                  <br />
-                  <span className="font-semibold">서울역에서 오실때</span>
-                  <br />
-                  서울역에서 퇴계로 방면으로 진입 &gt; 회현역 &gt; 회현사거리에서 직진 &gt;
-                  스테이트타워와 뉴오리엔탈호텔 사이로 우회전 &gt; 왼쪽 첫번째 골목 라루체
-                  <br />
-                  <br />
-                  <span className="font-semibold">왕십리방향에서 오실때</span>
-                  <br />
-                  왕십리역 &gt; 퇴계로에서 남대문 방향으로 직진 &gt; 퇴계로2가 지하차도 &gt;
-                  회현사거리 신세계백화점 앞에서 유턴 후 직진 &gt; 스테이트타워와 뉴오리엔탈호텔
-                  사이로 우회전 &gt; 왼쪽 첫번째 골목 라루체
+                <div className="mb-1 font-bold text-[#524548]">{carInfo.title}</div>
+                <div
+                  className="text-[15px] leading-relaxed text-[#544f4f]"
+                  style={{ whiteSpace: 'pre-line' }}
+                >
+                  {carInfo.desc}
                 </div>
               </div>
             </div>
@@ -708,22 +532,8 @@ export default function Home() {
             <Image src="/images/flower.svg" width={100} height={100} alt="flower" />
           </div>
           <div className="mb-4 text-[20px] font-semibold text-[#89757a]">마음 전하실 곳</div>
-          <AccountDropdown
-            label="신랑측 계좌번호"
-            accounts={[
-              { bank: '신한은행', number: '110-104-176731', name: '김 철' },
-              { bank: '신한은행', number: '553-11-004483', name: '권조희' },
-              { bank: '신한은행', number: '851-12-545579', name: '김윤환' },
-            ]}
-          />
-          <AccountDropdown
-            label="신부측 계좌번호"
-            accounts={[
-              { bank: '카카오뱅크', number: '1111111-111111', name: '백주선' },
-              { bank: '카카오뱅크', number: '1111111-111111', name: '송영미' },
-              { bank: '카카오뱅크', number: '1111111-111111', name: '김송희' },
-            ]}
-          />
+          <AccountDropdown label="신랑측 계좌번호" accounts={groomAccounts} />
+          <BrideAccountsDropdown params={params} />
         </section>
         {/* 푸터 */}
         <footer className="mt-8 mb-2 text-center text-xs text-gray-400">
