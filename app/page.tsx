@@ -31,8 +31,15 @@ const dday = WEDDING_DATE.diff(today, 'day');
 
 const galleryImages = [
   '/images/KakaoTalk_20250516_200424715_01.jpg',
+  '/images/RSM_3610.jpg',
   '/images/KakaoTalk_20250516_200424715_02.jpg',
-  '/images/KakaoTalk_20250516_200424715.jpg',
+  '/images/RSM_3723.jpg',
+  '/images/RSM_3750.jpg',
+  '/images/RSM_3754.jpg',
+  '/images/RSM_3887.jpg',
+  '/images/RSM_3896.jpg',
+  '/images/RSM_4453.jpg',
+  '/images/RSM_4472.jpg',
 ];
 
 function AccountDropdown({
@@ -407,7 +414,7 @@ export default function Home() {
           <div className="flex w-full justify-center">
             <div className="relative aspect-[4/3] w-full max-w-md overflow-hidden bg-gray-100">
               <Image
-                src={galleryImages[1]}
+                src={galleryImages[2]}
                 alt="신랑 신부 사진"
                 fill
                 className="object-cover object-center"
@@ -546,7 +553,7 @@ export default function Home() {
           </div>
         </section>
         {/* 갤러리(슬라이드) */}
-        <section className="py-6" data-aos="fade-up">
+        <section className="px-8 py-6" data-aos="fade-up">
           <div className="mb-6 flex flex-col items-center gap-1">
             <p className="text-xs tracking-widest text-[#89757a]">GALLERY</p>
             <p className="text-[20px] font-semibold text-[#89757a]">갤러리</p>
@@ -556,17 +563,11 @@ export default function Home() {
             slidesPerView={1}
             onSlideChange={(swiper) => setGalleryIdx(swiper.activeIndex)}
             onSwiper={(swiper) => (swiperRef.current = swiper)}
-            className="rounded-lg"
           >
             {galleryImages.map((src, i) => (
               <SwiperSlide key={src}>
                 <div className="relative h-120 w-full">
-                  <Image
-                    src={src}
-                    alt={`갤러리${i + 1}`}
-                    fill
-                    className="rounded-lg object-contain"
-                  />
+                  <Image src={src} alt={`갤러리${i + 1}`} fill className="object-contain" />
                 </div>
               </SwiperSlide>
             ))}
@@ -607,7 +608,7 @@ export default function Home() {
           {/* 카카오맵 지도 */}
           <div
             id="kakao-map"
-            style={{ width: '100%', height: 192, borderRadius: 8, overflow: 'hidden' }}
+            style={{ width: '100%', height: 230, borderRadius: 8, overflow: 'hidden' }}
           />
           <Script
             src={`//dapi.kakao.com/v2/maps/sdk.js?appkey=7e60cb452f34a8e29d0a9f5eaba7f790&autoload=false`}
@@ -618,12 +619,12 @@ export default function Home() {
                 kakao.maps.load(() => {
                   const container = document.getElementById('kakao-map');
                   const options = {
-                    center: new kakao.maps.LatLng(37.5607058, 126.9861774), // 서울 중구 퇴계로18길 46
-                    level: 3,
+                    center: new kakao.maps.LatLng(37.559185, 126.984395), // 서울 중구 퇴계로18길 46
+                    level: 4,
                   };
                   const map = new kakao.maps.Map(container, options);
                   new kakao.maps.Marker({
-                    position: new kakao.maps.LatLng(37.5607058, 126.9861774),
+                    position: new kakao.maps.LatLng(37.559185, 126.984395),
                     map,
                     title: '라루체웨딩홀 (명동)',
                   });
@@ -699,11 +700,19 @@ export default function Home() {
           <div className="mb-4 text-[20px] font-semibold text-[#89757a]">마음 전하실 곳</div>
           <AccountDropdown
             label="신랑측 계좌번호"
-            accounts={[{ bank: '카카오뱅크', number: '1111111-111111', name: '김윤환' }]}
+            accounts={[
+              { bank: '신한은행', number: '110-104-176731', name: '김 철' },
+              { bank: '신한은행', number: '553-11-004483', name: '권조희' },
+              { bank: '신한은행', number: '851-12-545579', name: '김윤환' },
+            ]}
           />
           <AccountDropdown
             label="신부측 계좌번호"
-            accounts={[{ bank: '카카오뱅크', number: '1111111-111111', name: '김송희' }]}
+            accounts={[
+              { bank: '카카오뱅크', number: '1111111-111111', name: '백주선' },
+              { bank: '카카오뱅크', number: '1111111-111111', name: '송영미' },
+              { bank: '카카오뱅크', number: '1111111-111111', name: '김송희' },
+            ]}
           />
         </section>
         {/* 푸터 */}
