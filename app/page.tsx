@@ -561,8 +561,14 @@ export default function Home() {
           <Swiper
             spaceBetween={8}
             slidesPerView={1}
-            onSlideChange={(swiper) => setGalleryIdx(swiper.activeIndex)}
+            loop
+            onSlideChange={(swiper) => {
+              // Swiper의 실제 인덱스는 loop일 때 0, 마지막에 dummy 슬라이드가 들어가므로
+              // realIndex를 사용해야 실제 이미지 인덱스와 맞음
+              setGalleryIdx(swiper.realIndex);
+            }}
             onSwiper={(swiper) => (swiperRef.current = swiper)}
+            initialSlide={galleryIdx}
           >
             {galleryImages.map((src, i) => (
               <SwiperSlide key={src}>
@@ -573,18 +579,22 @@ export default function Home() {
             ))}
           </Swiper>
           {/* 썸네일 */}
-          <div className="mt-3 flex justify-center gap-2">
-            {galleryImages.map((src, i) => (
+          <div className="mt-3 grid grid-cols-5 justify-center gap-1.5">
+            {galleryImages.slice(0, 20).map((src, i) => (
               <button
                 key={src}
                 type="button"
                 onClick={() => {
                   setGalleryIdx(i);
                   if (swiperRef.current) {
-                    swiperRef.current.slideTo(i);
+                    if (typeof swiperRef.current.slideToLoop === 'function') {
+                      swiperRef.current.slideToLoop(i);
+                    } else {
+                      swiperRef.current.slideTo(i);
+                    }
                   }
                 }}
-                className={`relative h-12 w-16 overflow-hidden transition-all ${galleryIdx === i ? 'brightness-100' : 'brightness-50'}`}
+                className={`relative h-16 w-full overflow-hidden transition-all ${galleryIdx === i ? 'brightness-100' : 'brightness-65'}`}
                 style={{ outline: 'none' }}
               >
                 <Image src={src} alt={`썸네일${i + 1}`} fill className="object-cover" />
