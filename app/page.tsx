@@ -262,7 +262,7 @@ export default function Home() {
           <div className="flex w-full justify-center">
             <div className="relative aspect-[4/3] w-full max-w-md overflow-hidden bg-gray-100">
               <Image
-                src={galleryImages[2]}
+                src={galleryImages[4]}
                 alt="신랑 신부 사진"
                 fill
                 className="object-cover object-center"
@@ -433,7 +433,7 @@ export default function Home() {
             {galleryImages.map((src, i) => (
               <SwiperSlide key={src}>
                 <div className="relative h-120 w-full">
-                  <Image src={src} alt={`갤러리${i + 1}`} fill className="object-contain" />
+                  <Image src={src} alt={`갤러리${i + 1}`} fill className="object-cover" />
                 </div>
               </SwiperSlide>
             ))}
