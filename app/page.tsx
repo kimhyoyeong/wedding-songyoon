@@ -14,7 +14,6 @@ import duration from 'dayjs/plugin/duration';
 import Script from 'next/script';
 import { FiVolume2, FiVolumeX } from 'react-icons/fi';
 import { useQueryParams } from './hooks/useQueryParams';
-import BrideInfo from './components/BrideInfo';
 import BrideAccountsDropdown from './components/BrideAccountsDropdown';
 import AccountDropdown from './components/AccountDropdown';
 import galleryImages from './data/galleryImages';
@@ -102,9 +101,10 @@ export default function Home() {
 
   const params = useQueryParams();
 
-  // 신부 부모 정보
-  const father = params?.has('ver1') ? '백주선' : params?.get('bride_father') || '故김복규';
-  const mother = params?.get('bride_mother') || '송영미';
+  // 신부, 신부 부, 신부 모 이름 분기처리
+  const brideName = params?.get('bride') || '김송희';
+  const brideFather = params?.has('ver1') ? '백주선' : params?.get('bride_father') || '故김복규';
+  const brideMother = params?.get('bride_mother') || '송영미';
 
   useEffect(() => {
     AOS.init({ duration: 1000, easing: 'ease-out' });
@@ -221,6 +221,9 @@ export default function Home() {
             {/* 우아한 꽃 SVG 아이콘 */}
             <Image src="/images/flower.svg" width={100} height={100} alt="flower" />
           </div>
+          {/* 초대장 타이틀 */}
+          <div className="mb-2 text-xs tracking-widest text-[#89757a]">INVITATION</div>
+          <div className="mb-2 text-[17px] font-semibold text-[#333]">소중한 분들을 초대합니다</div>
           {/* 시 */}
           <div className="text-[16px] leading-relaxed whitespace-pre-line text-[#524548]">
             햇살처럼 따듯하게 안아주고
@@ -238,19 +241,6 @@ export default function Home() {
             그 소중한 순간을
             <br />
             함께해 주시면 감사하겠습니다.
-          </div>
-          {/* 초대장 타이틀 */}
-          <div className="mt-8" data-aos="fade-up">
-            <div className="mb-2 text-xs tracking-widest text-[#89757a]">INVITATION</div>
-            <div className="mb-2 text-[17px] font-semibold text-[#333]">
-              소중한 분들을 초대합니다
-            </div>
-            <div className="text-[15px] leading-relaxed whitespace-pre-line text-[#524548]">
-              새 인생을 시작하는 이 자리에 오셔서
-              <br />
-              <strong className="font-semibold text-[#89757a]">축복</strong>해 주시면
-              감사하겠습니다.
-            </div>
           </div>
         </section>
         {/* 신랑신부 사진 + 연락하기 버튼 */}
@@ -273,42 +263,86 @@ export default function Home() {
           <div className="mt-6 mb-2 flex w-full max-w-md justify-between text-[18px] leading-relaxed text-[#524548]">
             {/* 신랑 */}
             <div className="flex flex-1 flex-col items-center">
-              <div className="flex flex-col items-center">
-                <div className="text-[18px] text-[#000]">
-                  <span className="font-semibold">신랑</span> 김윤환
+              <div className="flex flex-col items-center gap-2">
+                <div className="flex items-center gap-2 text-[18px] text-[#000]">
+                  <div>
+                    <span className="font-semibold">신랑</span> 김윤환
+                  </div>
+                  <a
+                    href="tel:01050525951"
+                    className="mt-4 flex items-center justify-center gap-2 rounded-3xl border border-[#e8dfdf] px-2 py-1 text-[14px] text-[#89757a] transition hover:bg-gray-100"
+                    style={{ width: 'fit-content', margin: '0 auto' }}
+                  >
+                    <FaPhoneAlt />
+                  </a>
                 </div>
-                <div className="mt-1 text-[13px] text-[#89757a]">
-                  <span className="font-semibold">부</span> 김 철&nbsp;&nbsp;
-                  <span className="font-semibold">모</span> 권조희
+                <div className="flex items-center gap-2 text-[14px] text-[#89757a]">
+                  <div>
+                    <span className="font-semibold">아버지</span> 김 철
+                  </div>
+                  <a
+                    href="tel:01052355758"
+                    className="mt-4 flex items-center justify-center gap-2 rounded-3xl border border-[#e8dfdf] px-2 py-1 text-[14px] text-[#89757a] transition hover:bg-gray-100"
+                    style={{ width: 'fit-content', margin: '0 auto' }}
+                  >
+                    <FaPhoneAlt />
+                  </a>
                 </div>
-              </div>
-              <div className="mt-2">
-                <a
-                  href="tel:01012345678"
-                  className="mt-4 flex items-center justify-center gap-2 rounded-3xl border border-[#e8dfdf] px-4 py-2 text-[14px] text-[#89757a] transition hover:bg-gray-100"
-                  style={{ width: 'fit-content', margin: '0 auto' }}
-                >
-                  <FaPhoneAlt />
-                  연락하기
-                </a>
+                <div className="flex items-center gap-2 text-[14px] text-[#89757a]">
+                  <div>
+                    <span className="font-semibold">어머니</span> 권조희
+                  </div>
+                  <a
+                    href="tel:01036065951"
+                    className="mt-4 flex items-center justify-center gap-2 rounded-3xl border border-[#e8dfdf] px-2 py-1 text-[14px] text-[#89757a] transition hover:bg-gray-100"
+                    style={{ width: 'fit-content', margin: '0 auto' }}
+                  >
+                    <FaPhoneAlt />
+                  </a>
+                </div>
               </div>
             </div>
             {/* 신부 */}
             <div className="flex flex-1 flex-col items-center">
-              <div className="text-[18px] text-[#000]">
-                <span className="font-semibold">신부</span> 김송희
-              </div>
-              {/* 신부 부모 정보: 주소 파라미터에서 받아오기 */}
-              <BrideInfo father={father} mother={mother} />
-              <div className="mt-2">
-                <a
-                  href="tel:01050512473"
-                  className="mt-4 flex items-center justify-center gap-2 rounded-3xl border border-[#e8dfdf] px-4 py-2 text-[14px] text-[#89757a] transition hover:bg-gray-100"
-                  style={{ width: 'fit-content', margin: '0 auto' }}
-                >
-                  <FaPhoneAlt />
-                  연락하기
-                </a>
+              <div className="flex flex-col items-center gap-2">
+                <div className="flex items-center gap-2 text-[18px] text-[#000]">
+                  <div>
+                    <span className="font-semibold">신부</span> {brideName}
+                  </div>
+                  <a
+                    href="tel:01050512473"
+                    className="mt-4 flex items-center justify-center gap-2 rounded-3xl border border-[#e8dfdf] px-2 py-1 text-[14px] text-[#89757a] transition hover:bg-gray-100"
+                    style={{ width: 'fit-content', margin: '0 auto' }}
+                  >
+                    <FaPhoneAlt />
+                  </a>
+                </div>
+                <div className="flex items-center gap-2 text-[14px] text-[#89757a]">
+                  <div>
+                    <span className="font-semibold">아버지</span> {brideFather}
+                  </div>
+                  {brideFather === '백주선' && (
+                    <a
+                      href="tel:01062685140"
+                      className="mt-4 flex items-center justify-center gap-2 rounded-3xl border border-[#e8dfdf] px-2 py-1 text-[14px] text-[#89757a] transition hover:bg-gray-100"
+                      style={{ width: 'fit-content', margin: '0 auto' }}
+                    >
+                      <FaPhoneAlt />
+                    </a>
+                  )}
+                </div>
+                <div className="flex items-center gap-2 text-[14px] text-[#89757a]">
+                  <div>
+                    <span className="font-semibold">어머니</span> {brideMother}
+                  </div>
+                  <a
+                    href="tel:01037362473"
+                    className="mt-4 flex items-center justify-center gap-2 rounded-3xl border border-[#e8dfdf] px-2 py-1 text-[14px] text-[#89757a] transition hover:bg-gray-100"
+                    style={{ width: 'fit-content', margin: '0 auto' }}
+                  >
+                    <FaPhoneAlt />
+                  </a>
+                </div>
               </div>
             </div>
           </div>
@@ -507,7 +541,7 @@ export default function Home() {
             <div className="flex items-start gap-4">
               <FaSubway className="text-[#cec3c3]" size={28} />
               <div className="flex-1">
-                <div className="mb-1 font-bold text-[#524548]">{subwayInfo.title}</div>
+                <div className="mb-1 font-bold text-[#89757a]">{subwayInfo.title}</div>
                 <div className="text-[15px] leading-relaxed text-[#544f4f]">{subwayInfo.desc}</div>
               </div>
             </div>
@@ -516,7 +550,7 @@ export default function Home() {
             <div className="flex items-start gap-4">
               <FaBus className="text-[#cec3c3]" size={28} />
               <div className="flex-1">
-                <div className="mb-1 font-bold text-[#524548]">{busInfo.title}</div>
+                <div className="mb-1 font-bold text-[#89757a]">{busInfo.title}</div>
                 <div
                   className="text-[15px] leading-relaxed text-[#544f4f]"
                   style={{ whiteSpace: 'pre-line' }}
@@ -530,7 +564,7 @@ export default function Home() {
             <div className="flex items-start gap-4">
               <FaParking className="text-[#cec3c3]" size={28} />
               <div className="flex-1">
-                <div className="mb-1 font-bold text-[#524548]">{carInfo.title}</div>
+                <div className="mb-1 font-bold text-[#89757a]">{carInfo.title}</div>
                 <div
                   className="text-[15px] leading-relaxed text-[#544f4f]"
                   style={{ whiteSpace: 'pre-line' }}
