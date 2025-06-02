@@ -207,7 +207,7 @@ export default function Home() {
             김윤환&nbsp;&nbsp;|&nbsp;&nbsp;김송희
           </div>
           <div className="text-[17px] text-[#333]">2025년 8월 24일 일요일 오후 1시</div>
-          <div className="text-[17px] text-[#333]">라루체 웨딩홀 루아르홀</div>
+          <div className="text-[17px] text-[#333]">명동 라루체 웨딩홀 4층 루아르홀</div>
         </section>
 
         {/* 인사말(시) 및 초대 문구 */}
@@ -580,13 +580,28 @@ export default function Home() {
           className="flex flex-col items-center gap-4 px-8 py-6 text-center"
           data-aos="fade-up"
         >
-          <div>
-            {/* 꽃 SVG */}
-            <Image src="/images/flower.svg" width={100} height={100} alt="flower" />
-          </div>
+          {/* 꽃 SVG */}
+          <Image src="/images/flower.svg" width={100} height={100} alt="flower" />
           <div className="mb-4 text-[20px] font-semibold text-[#89757a]">마음 전하실 곳</div>
           <AccountDropdown label="신랑측 계좌번호" accounts={groomAccounts} />
           <BrideAccountsDropdown params={params} />
+        </section>
+        <section
+          className="flex flex-col items-center gap-4 px-8 py-6 text-center"
+          data-aos="fade-up"
+        >
+          <div className="flex flex-col items-center gap-1">
+            <p className="text-xs tracking-widest text-[#89757a]">Notice</p>
+            <p className="text-[20px] font-semibold text-[#89757a]">축하 화환 안내</p>
+          </div>
+          <div className="w-full rounded-xl border border-[#e8dfdf] bg-white/90 p-10 text-[14px]">
+            식장 규정에 따라
+            <br />
+            화환은 정중히 사양합니다.
+            <br />
+            <br />
+            좋은 마음만 감사히 받겠습니다.
+          </div>
         </section>
         {/* 푸터 */}
         <footer className="mt-8 mb-2 text-center text-xs text-gray-400">

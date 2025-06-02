@@ -1,5 +1,5 @@
 export const weddingLocation = {
-  name: '명동 라루체 웨딩홀 루아르홀',
+  name: '명동 라루체 웨딩홀 4층 루아르홀',
   address: '서울특별시 중구 퇴계로 18길 46',
   lat: 37.559185,
   lng: 126.984395,
