@@ -178,3 +178,12 @@ body {
 .sparkle svg {
   animation: sparkle-twinkle 1.2s infinite;
 }
+
+.custom-thumb-slide {
+  filter: brightness(0.7);
+  transition: filter 1s ease;
+}
+
+.custom-thumb-slide.swiper-slide-thumb-active {
+  filter: brightness(1);
+}
