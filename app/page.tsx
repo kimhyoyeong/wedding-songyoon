@@ -207,7 +207,7 @@ export default function Home() {
             김윤환&nbsp;&nbsp;|&nbsp;&nbsp;김송희
           </div>
           <div className="text-[17px] text-[#333]">2025년 8월 24일 일요일 오후 1시</div>
-          <div className="text-[17px] text-[#333]">명동 라루체 웨딩홀 4층 루아르홀</div>
+          <div className="text-[17px] text-[#333]">명동 라루체 웨딩 4층 루아르홀</div>
         </section>
 
         {/* 인사말(시) 및 초대 문구 */}

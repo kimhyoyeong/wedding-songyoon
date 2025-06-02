@@ -14,11 +14,12 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: '윤환 & 송희 결혼식 모바일 청첩장',
-  description: '2025년 8월 24일, 명동 라루체 웨딩홀에서 열리는 윤환 & 송희의 결혼식에 초대합니다.',
+  description:
+    '2025년 8월 24일, 명동 라루체 웨딩 4층 루아르홀에서 열리는 윤환 & 송희의 결혼식에 초대합니다.',
   openGraph: {
     title: '윤환 & 송희 결혼식 모바일 청첩장',
     description:
-      '2025년 8월 24일, 명동 라루체 웨딩홀에서 열리는 윤환 & 송희의 결혼식에 초대합니다.',
+      '2025년 8월 24일, 명동 라루체 웨딩 4층 루아르홀에서 열리는 윤환 & 송희의 결혼식에 초대합니다.',
     url: 'https://wedding-songyoon.vercel.app/',
     type: 'website',
     images: [
