@@ -99,8 +99,6 @@ function BGMPlayer({ playTrigger }: { playTrigger?: boolean }) {
 }
 
 export default function Home() {
-  const [galleryIdx, setGalleryIdx] = useState(0);
-  const swiperRef = useRef<SwiperClass | null>(null);
   const [showPopup, setShowPopup] = useState(true);
   const [fadeOut, setFadeOut] = useState(false);
   const [playBGM, setPlayBGM] = useState(false);
