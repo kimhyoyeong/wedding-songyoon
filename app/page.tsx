@@ -93,8 +93,6 @@ function BGMPlayer({ playTrigger }: { playTrigger?: boolean }) {
 }
 
 export default function Home() {
-  const [galleryIdx, setGalleryIdx] = useState(0);
-  const swiperRef = useRef<SwiperClass | null>(null);
   const [showPopup, setShowPopup] = useState(true);
   const [fadeOut, setFadeOut] = useState(false);
   const [playBGM, setPlayBGM] = useState(false);
@@ -452,16 +450,10 @@ export default function Home() {
             <p className="text-[20px] font-semibold text-[#89757a]">갤러리</p>
           </div>
           <Swiper
-            spaceBetween={8}
-            slidesPerView={1}
-            loop
-            onSlideChange={(swiper) => {
-              // Swiper의 실제 인덱스는 loop일 때 0, 마지막에 dummy 슬라이드가 들어가므로
-              // realIndex를 사용해야 실제 이미지 인덱스와 맞음
-              setGalleryIdx(swiper.realIndex);
-            }}
-            onSwiper={(swiper) => (swiperRef.current = swiper)}
-            initialSlide={galleryIdx}
+            modules={[Navigation, Thumbs]}
+            spaceBetween={10}
+            thumbs={{ swiper: thumbsSwiper && !thumbsSwiper.destroyed ? thumbsSwiper : null }}
+            className="mySwiper2"
           >
             {galleryImages.map((src, i) => (
               <SwiperSlide key={src}>
@@ -472,28 +464,24 @@ export default function Home() {
             ))}
           </Swiper>
           {/* 썸네일 */}
-          <div className="mt-3 grid grid-cols-5 justify-center gap-1.5">
-            {galleryImages.slice(0, 20).map((src, i) => (
-              <button
-                key={src}
-                type="button"
-                onClick={() => {
-                  setGalleryIdx(i);
-                  if (swiperRef.current) {
-                    if (typeof swiperRef.current.slideToLoop === 'function') {
-                      swiperRef.current.slideToLoop(i);
-                    } else {
-                      swiperRef.current.slideTo(i);
-                    }
-                  }
-                }}
-                className={`relative h-16 w-full overflow-hidden transition-all ${galleryIdx === i ? 'brightness-100' : 'brightness-65'}`}
-                style={{ outline: 'none' }}
-              >
-                <Image src={src} alt={`썸네일${i + 1}`} fill className="object-cover" />
-              </button>
+          <Swiper
+            modules={[FreeMode, Thumbs]}
+            onSwiper={setThumbsSwiper}
+            spaceBetween={10}
+            slidesPerView={6.8}
+            freeMode
+            watchSlidesProgress
+            className="mySwiper"
+            style={{ marginTop: 16 }}
+          >
+            {galleryImages.map((src, i) => (
+              <SwiperSlide key={src} className="custom-thumb-slide">
+                <div className="relative h-16 w-full">
+                  <Image src={src} alt={`썸네일${i + 1}`} fill className="object-cover" />
+                </div>
+              </SwiperSlide>
             ))}
-          </div>
+          </Swiper>
         </section>
         {/* 오시는 길 (지도) */}
         <section className="flex flex-col gap-6 px-8 py-6" data-aos="fade-up">
