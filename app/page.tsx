@@ -594,12 +594,12 @@ export default function Home() {
             <p className="text-[20px] font-semibold text-[#89757a]">축하 화환 안내</p>
           </div>
           <div className="w-full rounded-xl border border-[#e8dfdf] bg-white/90 p-10 text-[14px]">
-            식장 규정에 따라
+            예식장 규정으로 <br />
+            화환 반입이 불가합니다.
             <br />
-            화환은 정중히 사양합니다.
             <br />
-            <br />
-            좋은 마음만 감사히 받겠습니다.
+            축하해 주시는 <br />
+            마음만 소중히 간직하겠습니다.
           </div>
         </section>
         {/* 푸터 */}
