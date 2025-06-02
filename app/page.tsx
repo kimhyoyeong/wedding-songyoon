@@ -484,7 +484,6 @@ export default function Home() {
               spaceBetween={10}
               slidesPerView={5.8}
               freeMode
-              watchSlidesProgress
               className="mySwiper"
               style={{ marginTop: 16 }}
             >

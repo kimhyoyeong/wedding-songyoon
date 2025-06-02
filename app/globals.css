@@ -180,7 +180,7 @@ body {
 }
 
 .custom-thumb-slide {
-  filter: brightness(0.7);
+  filter: brightness(0.6);
   transition: filter 1s ease;
 }
 
