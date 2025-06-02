@@ -465,11 +465,12 @@ export default function Home() {
             <Swiper
               modules={[Navigation, Thumbs]}
               spaceBetween={10}
+              centeredSlides
               thumbs={{ swiper: thumbsSwiper && !thumbsSwiper.destroyed ? thumbsSwiper : null }}
               className="mySwiper2"
             >
               {galleryImages.map((src, i) => (
-                <SwiperSlide key={i}>
+                <SwiperSlide key={src}>
                   <div className="relative h-120 w-full">
                     <Image src={src} alt={`갤러리${i + 1}`} fill className="object-cover" />
                   </div>
@@ -481,14 +482,14 @@ export default function Home() {
               modules={[FreeMode, Thumbs]}
               onSwiper={setThumbsSwiper}
               spaceBetween={10}
-              slidesPerView={6.8}
+              slidesPerView={5.8}
               freeMode
               watchSlidesProgress
               className="mySwiper"
               style={{ marginTop: 16 }}
             >
               {galleryImages.map((src, i) => (
-                <SwiperSlide key={i} className="custom-thumb-slide">
+                <SwiperSlide key={src} className="custom-thumb-slide">
                   <div className="relative h-16 w-full">
                     <Image src={src} alt={`썸네일${i + 1}`} fill className="object-cover" />
                   </div>
