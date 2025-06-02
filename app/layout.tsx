@@ -30,13 +30,6 @@ export const metadata: Metadata = {
       },
     ],
   },
-  twitter: {
-    card: 'summary_large_image',
-    title: '윤환 & 송희 결혼식 모바일 청첩장',
-    description:
-      '2025년 8월 24일, 명동 라루체 웨딩홀에서 열리는 윤환 & 송희의 결혼식에 초대합니다.',
-    images: ['https://wedding-songyoon.vercel.app/images/KakaoTalk_20250516_200424715_01.jpg'],
-  },
 };
 
 export default function RootLayout({

@@ -162,7 +162,7 @@ export default function Home() {
         <BGMPlayer playTrigger={playBGM} />
         <SparkleRain count={18} />
         <PetalRain count={18} />
-        <div className="relative flex h-[100svh] w-full items-center justify-center bg-white">
+        <div className="relative flex h-[100svh] max-h-[650px] w-full items-center justify-center bg-white">
           <Image
             src={galleryImages[0]}
             alt="대표 이미지"
@@ -263,38 +263,38 @@ export default function Home() {
           <div className="mt-6 mb-2 flex w-full max-w-md justify-between text-[18px] leading-relaxed text-[#524548]">
             {/* 신랑 */}
             <div className="flex flex-1 flex-col items-center">
-              <div className="flex flex-col items-center gap-2">
-                <div className="flex items-center gap-2 text-[18px] text-[#000]">
+              <div className="flex flex-col items-center">
+                <div className="mb-3 flex items-center gap-2 text-[18px] text-[#000]">
                   <div>
                     <span className="font-semibold">신랑</span> 김윤환
+                    <a
+                      href="tel:01050525951"
+                      className="mt-2 flex items-center justify-center gap-2 rounded-full border border-[#e8dfdf] px-3 py-1 text-[14px] text-[#89757a] transition hover:bg-gray-100"
+                    >
+                      <FaPhoneAlt />
+                      연락하기
+                    </a>
                   </div>
-                  <a
-                    href="tel:01050525951"
-                    className="mt-4 flex items-center justify-center gap-2 rounded-full border border-[#e8dfdf] p-2 text-[14px] text-[#89757a] transition hover:bg-gray-100"
-                    style={{ width: 'fit-content', margin: '0 auto' }}
-                  >
-                    <FaPhoneAlt />
-                  </a>
                 </div>
-                <div className="flex items-center gap-2 text-[14px] text-[#89757a]">
+                <div className="flex items-center text-[14px] text-[#89757a]">
                   <div>
                     <span className="font-semibold">아버지</span> 김 철
                   </div>
                   <a
                     href="tel:01052355758"
-                    className="mt-4 flex items-center justify-center gap-2 rounded-full border border-[#e8dfdf] p-2 text-[14px] text-[#89757a] transition hover:bg-gray-100"
+                    className="mt-4 flex items-center justify-center gap-2 p-2 text-[14px] text-[#89757a]"
                     style={{ width: 'fit-content', margin: '0 auto' }}
                   >
                     <FaPhoneAlt />
                   </a>
                 </div>
-                <div className="flex items-center gap-2 text-[14px] text-[#89757a]">
+                <div className="flex items-center text-[14px] text-[#89757a]">
                   <div>
                     <span className="font-semibold">어머니</span> 권조희
                   </div>
                   <a
                     href="tel:01036065951"
-                    className="mt-4 flex items-center justify-center gap-2 rounded-full border border-[#e8dfdf] p-2 text-[14px] text-[#89757a] transition hover:bg-gray-100"
+                    className="mt-4 flex items-center justify-center gap-2 p-2 text-[14px] text-[#89757a]"
                     style={{ width: 'fit-content', margin: '0 auto' }}
                   >
                     <FaPhoneAlt />
@@ -303,41 +303,40 @@ export default function Home() {
               </div>
             </div>
             {/* 신부 */}
-            <div className="flex flex-1 flex-col items-center">
-              <div className="flex flex-col items-center gap-2">
-                <div className="flex items-center gap-2 text-[18px] text-[#000]">
+            <div className="flex flex-1 flex-col items-center justify-around">
+              <div className="flex flex-col items-center">
+                <div className="mb-3 flex items-center gap-2 text-[18px] text-[#000]">
                   <div>
                     <span className="font-semibold">신부</span> {brideName}
+                    <a
+                      href="tel:01050512473"
+                      className="mt-2 flex items-center justify-center gap-2 rounded-full border border-[#e8dfdf] px-3 py-1 text-[14px] text-[#89757a] transition hover:bg-gray-100"
+                    >
+                      <FaPhoneAlt /> 연락하기
+                    </a>
                   </div>
-                  <a
-                    href="tel:01050512473"
-                    className="mt-4 flex items-center justify-center gap-2 rounded-full border border-[#e8dfdf] p-2 text-[14px] text-[#89757a] transition hover:bg-gray-100"
-                    style={{ width: 'fit-content', margin: '0 auto' }}
-                  >
-                    <FaPhoneAlt />
-                  </a>
                 </div>
-                <div className="flex items-center gap-2 text-[14px] text-[#89757a]">
+                <div className="flex items-center text-[14px] text-[#89757a]">
                   <div>
                     <span className="font-semibold">아버지</span> {brideFather}
                   </div>
                   {brideFather === '백주선' && (
                     <a
                       href="tel:01062685140"
-                      className="mt-4 flex items-center justify-center gap-2 rounded-full border border-[#e8dfdf] p-2 text-[14px] text-[#89757a] transition hover:bg-gray-100"
+                      className="mt-4 flex items-center justify-center gap-2 p-2 text-[14px] text-[#89757a]"
                       style={{ width: 'fit-content', margin: '0 auto' }}
                     >
                       <FaPhoneAlt />
                     </a>
                   )}
                 </div>
-                <div className="flex items-center gap-2 text-[14px] text-[#89757a]">
+                <div className="flex items-center text-[14px] text-[#89757a]">
                   <div>
                     <span className="font-semibold">어머니</span> {brideMother}
                   </div>
                   <a
                     href="tel:01037362473"
-                    className="mt-4 flex items-center justify-center gap-2 rounded-full border border-[#e8dfdf] p-2 text-[14px] text-[#89757a] transition hover:bg-gray-100"
+                    className="mt-4 flex items-center justify-center gap-2 p-2 text-[14px] text-[#89757a]"
                     style={{ width: 'fit-content', margin: '0 auto' }}
                   >
                     <FaPhoneAlt />
