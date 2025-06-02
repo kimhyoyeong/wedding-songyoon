@@ -469,7 +469,7 @@ export default function Home() {
               className="mySwiper2"
             >
               {galleryImages.map((src, i) => (
-                <SwiperSlide key={src}>
+                <SwiperSlide key={i}>
                   <div className="relative h-120 w-full">
                     <Image src={src} alt={`갤러리${i + 1}`} fill className="object-cover" />
                   </div>
@@ -488,7 +488,7 @@ export default function Home() {
               style={{ marginTop: 16 }}
             >
               {galleryImages.map((src, i) => (
-                <SwiperSlide key={src} className="custom-thumb-slide">
+                <SwiperSlide key={i} className="custom-thumb-slide">
                   <div className="relative h-16 w-full">
                     <Image src={src} alt={`썸네일${i + 1}`} fill className="object-cover" />
                   </div>
