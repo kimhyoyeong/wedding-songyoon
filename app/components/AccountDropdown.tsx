@@ -54,7 +54,7 @@ export default function AccountDropdown({
             <div className="flex gap-2">
               <button
                 onClick={() => handleCopy(acc)}
-                className="flex items-center gap-1 bg-gray-50 px-3 py-1 text-[14px] text-[#333] hover:bg-gray-100"
+                className="flex min-w-[72px] items-center gap-1 bg-gray-50 px-3 py-1 text-[14px] text-[#333] hover:bg-gray-100"
                 style={{ borderRadius: 0 }}
               >
                 <svg
