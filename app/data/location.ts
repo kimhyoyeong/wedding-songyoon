@@ -17,5 +17,5 @@ export const busInfo = {
 
 export const carInfo = {
   title: '자가용',
-  desc: `중구 퇴계로 18길 46 (남산동1가 13-6)`,
+  desc: `중구 퇴계로 18길 46 (남산동1가 13-6)\n주차는 2시간 무료 제공됩니다.`,
 };
